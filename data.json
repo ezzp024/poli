@@ -1,0 +1,33 @@
+{
+  "passwordHash": "0dec64278bc58d15bd4dc0b7bc590c17831d515270377394fcffb344a0e3ce41",
+  "songs": [
+    {"id":"s1","title":"Crypt Lullaby","artist":"poli","url":"assets/bgm.mp3","cover":"assets/bg2.gif"}
+  ],
+  "backgrounds": [
+    {"id":"b1","name":"Yuno","url":"assets/bg2.gif"},
+    {"id":"b2","name":"Vampire","url":"assets/bg4.gif"},
+    {"id":"b3","name":"Uzumaki","url":"assets/bg3.gif"},
+    {"id":"b4","name":"Yandere","url":"assets/bg1.gif"}
+  ],
+  "activeBackground": "b1",
+  "profile": {
+    "name": "poli",
+    "handle": "poli",
+    "bio": "half <em>ghost</em>, half glitch<br/>dancing on broken code · <em>3:33am</em>",
+    "avatar": "assets/bg1.gif",
+    "stats": {"followers":"666","visits":"13.6K","vibes":"∞"}
+  },
+  "links": [
+    {"icon":"discord","label":"discord · join the crypt","url":"#"},
+    {"icon":"twitch","label":"twitch · live now","url":"#"},
+    {"icon":"spotify","label":"spotify · now playing","url":"#"}
+  ],
+  "socials": [
+    {"icon":"discord","url":"#"},
+    {"icon":"x","url":"#"},
+    {"icon":"instagram","url":"#"},
+    {"icon":"tiktok","url":"#"},
+    {"icon":"youtube","url":"#"},
+    {"icon":"telegram","url":"#"}
+  ]
+}
