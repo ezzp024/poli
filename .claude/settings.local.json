@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(start *)",
+      "WebSearch",
+      "WebFetch(domain:giphy.com)",
+      "WebFetch(domain:tenor.com)",
+      "Bash(curl -L -A \"Mozilla/5.0\" -o assets/bg1.gif \"https://media.tenor.com/vGkQvZcI9rAAAAAM/yandere-creepy-anime-girl.gif\" -w \"%{http_code} %{size_download}\\\\n\" -s)",
+      "Bash(curl -L -A \"Mozilla/5.0\" -o assets/bg2.gif \"https://media.tenor.com/UvGgL3uIoAAAAAAM/mirai-nikki-yuno-gasai.gif\" -w \"%{http_code} %{size_download}\\\\n\" -s)",
+      "Bash(curl -L -A \"Mozilla/5.0\" -o assets/bg3.gif \"https://media.tenor.com/prpIddlf9JYAAAAM/anime-uzumaki.gif\" -w \"%{http_code} %{size_download}\\\\n\" -s)",
+      "Bash(curl -L -A \"Mozilla/5.0\" -o assets/bg4.gif \"https://media0.giphy.com/media/TibRWw2D1HobJvKVYX/giphy.gif\" -w \"%{http_code} %{size_download}\\\\n\" -s)",
+      "Bash(curl -I -L -A \"Mozilla/5.0\" \"https://cdn.pixabay.com/audio/2022/10/30/audio_347111d654.mp3\")",
+      "WebFetch(domain:archive.org)",
+      "Bash(curl -L -A \"Mozilla/5.0\" -o assets/bgm.mp3 \"https://archive.org/download/darkambient_201908/Suspense%20Piano%20Loop.mp3\" -w \"%{http_code} %{size_download}\\\\n\" -s)",
+      "Bash(where node *)",
+      "Bash(where git *)",
+      "Bash(where gh *)",
+      "Bash(gh auth *)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git -c user.email=\"yuripoli1973@gmail.com\" -c user.name=\"poli\" commit -m \"init: poli bio page\")",
+      "Bash(gh repo *)",
+      "Bash(gh api *)",
+      "PowerShell($h=[System.Security.Cryptography.SHA256]::Create\\(\\);$b=[System.Text.Encoding]::UTF8.GetBytes\\(\"poli666\"\\);\\($h.ComputeHash\\($b\\)|ForEach-Object{$_.ToString\\(\"x2\"\\)}\\) -join \"\")",
+      "Bash(git -c user.email=\"yuripoli1973@gmail.com\" -c user.name=\"poli\" commit -m \"feat: music library + admin panel + bg manager\")",
+      "Bash(git push *)",
+      "WebFetch(domain:cosmocheats.com)",
+      "Bash(curl -s -L -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" \"https://cosmocheats.com/\" -o /tmp/cosmo.html -w \"%{http_code}\\\\n\")",
+      "Read(//tmp/**)",
+      "Bash(grep -oE '#[0-9a-fA-F]{3,6}\\\\b|background:\\\\s*[^;]+;|color:\\\\s*[^;]+;|--[a-z-]+:[^;}]+|font-family:[^;}]+' /tmp/cosmo.html)",
+      "Bash(git -c user.email=\"yuripoli1973@gmail.com\" -c user.name=\"poli\" commit -m \"feat: cosmocheats-style staff & support landing page\")",
+      "Bash(git -c user.email=\"yuripoli1973@gmail.com\" -c user.name=\"poli\" commit -m \"feat: per-staff bio pages \\(s.html?u=name\\) cosmocheats theme\")",
+      "Bash(git -c user.email=\"yuripoli1973@gmail.com\" -c user.name=\"poli\" commit -m \"feat: add life — entrance anims, 3d tilt, ripple, holo banner, trust badges, live ticker, reviews, confetti + real ticket URL\")",
+      "Bash(git -c user.email=\"yuripoli1973@gmail.com\" -c user.name=\"poli\" commit -m \"fix: cleaner minimal redesign + Discord copy-message-and-open behavior\")",
+      "Bash(git -c user.email=\"yuripoli1973@gmail.com\" -c user.name=\"poli\" commit -m \"polish: refined dark palette + subtle lighting + circular avatar + tighter typography\")",
+      "Bash(git -c user.email=\"yuripoli1973@gmail.com\" -c user.name=\"poli\" commit -m \"feat: rotating avatar ring + gradient name + presence widget + view/like counter + snowfall + mouse parallax + float anim\")",
+      "Bash(cp -r \"C:/Users/popa/Desktop/New folder \\(20\\)\" \"C:/Users/popa/Desktop/poli-bio\")",
+      "Read(//c/Users/popa/Desktop/**)",
+      "Bash(rm -rf .git staff staff.html s.html)",
+      "Bash(git rm *)"
+    ]
+  }
+}

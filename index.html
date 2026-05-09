@@ -3,656 +3,555 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>poli ✟</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Orbitron:wght@400;700&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
+<title>Staff & Support · Cosmo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --c-bg:#0a050a;
-  --c-blood:#e51e3a;
-  --c-blood-soft:#a01828;
-  --c-bone:#f5ede4;
-  --c-mute:rgba(245,237,228,.6);
-  --c-panel:rgba(15,8,15,.92);
+  --bg:#070611;
+  --bg-2:#0d0c1f;
+  --panel:rgba(20,18,40,.6);
+  --panel-solid:#13112a;
+  --line:rgba(255,255,255,.08);
+  --line-bright:rgba(136,56,212,.4);
+  --txt:#e8eaf2;
+  --mute:#939cb1;
+  --dim:#5b6175;
+  --purple:#8838d4;
+  --purple-glow:#a855f7;
+  --lime:#8fce00;
+  --lime-glow:#b5ff2e;
+  --blue:#4285F4;
+  --discord:#5865F2;
+  --green:#22c55e;
+  --red:#ef4444;
+  --gold:#fbbf24;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-html,body{height:100%;background:var(--c-bg);color:var(--c-bone);font-family:'JetBrains Mono',monospace;overflow:hidden;}
-button,a,input{font-family:inherit;}
+html,body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;}
 a{color:inherit;text-decoration:none;}
-button{cursor:pointer;border:none;background:none;color:inherit;}
-::-webkit-scrollbar{width:6px;}
-::-webkit-scrollbar-track{background:transparent;}
-::-webkit-scrollbar-thumb{background:rgba(229,30,58,.4);border-radius:3px;}
+button{cursor:pointer;border:none;background:none;color:inherit;font-family:inherit;}
+img{display:block;max-width:100%;}
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-track{background:#0a0815;}
+::-webkit-scrollbar-thumb{background:rgba(136,56,212,.4);border-radius:4px;}
 
-.splash{position:fixed;inset:0;z-index:1000;background:#000;display:flex;align-items:center;justify-content:center;
-  flex-direction:column;gap:14px;cursor:pointer;transition:opacity .9s ease, visibility .9s;}
-.splash.gone{opacity:0;visibility:hidden;}
-.splash h2{font-family:'Cinzel Decorative',serif;font-weight:900;font-size:clamp(2rem,5vw,3.4rem);
-  letter-spacing:10px;text-shadow:0 0 18px var(--c-blood-soft);animation:breathe 3s ease-in-out infinite;}
-.splash p{font-family:'Orbitron',sans-serif;font-size:.65rem;letter-spacing:6px;color:var(--c-mute);text-transform:uppercase;
-  animation:pulse 2s ease-in-out infinite;}
-@keyframes breathe{0%,100%{opacity:.85;}50%{opacity:1;text-shadow:0 0 28px var(--c-blood);}}
-@keyframes pulse{0%,100%{opacity:.3;}50%{opacity:.9;}}
+/* ============ COSMIC BG ============ */
+.bg-cosmos{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
+.bg-cosmos::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(ellipse 80% 60% at 20% 10%,rgba(136,56,212,.25),transparent 60%),
+  radial-gradient(ellipse 60% 50% at 80% 30%,rgba(66,133,244,.15),transparent 60%),
+  radial-gradient(ellipse 70% 80% at 50% 100%,rgba(143,206,0,.08),transparent 60%),
+  linear-gradient(180deg,#070611 0%,#0a0815 50%,#070611 100%);}
+.stars{position:absolute;inset:0;}
+.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.6;
+  animation:twinkle var(--dur,4s) ease-in-out infinite;animation-delay:var(--d,0s);}
+@keyframes twinkle{0%,100%{opacity:.2;transform:scale(1);}50%{opacity:1;transform:scale(1.4);box-shadow:0 0 6px #fff;}}
+.shoot{position:absolute;width:120px;height:1px;background:linear-gradient(90deg,transparent,#fff,transparent);
+  opacity:0;animation:shoot 8s linear infinite;animation-delay:var(--d,0s);}
+@keyframes shoot{
+  0%{opacity:0;transform:translateX(-200px) translateY(0) rotate(-20deg);}
+  10%{opacity:1;}
+  20%{opacity:0;transform:translateX(100vw) translateY(40vh) rotate(-20deg);}
+  100%{opacity:0;}
+}
+.grid-floor{position:absolute;bottom:0;left:0;right:0;height:50vh;perspective:600px;opacity:.25;}
+.grid-floor::before{content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(136,56,212,.4) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(136,56,212,.4) 1px,transparent 1px);
+  background-size:50px 50px;
+  transform:rotateX(70deg) translateZ(0);
+  mask-image:linear-gradient(180deg,transparent 0%,#000 60%,transparent 100%);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 60%,transparent 100%);
+  animation:gridScroll 12s linear infinite;}
+@keyframes gridScroll{to{transform:rotateX(70deg) translateZ(0) translateY(50px);}}
 
-.bg-stack{position:fixed;inset:0;z-index:0;overflow:hidden;}
-.bg-gif{position:absolute;inset:-4%;background-position:center;background-size:cover;background-repeat:no-repeat;
-  filter:blur(2px) brightness(.7) saturate(1.1) contrast(1.05);transform:scale(1.06);transition:opacity .6s, background-image .6s;}
-.bg-tint{position:absolute;inset:0;background:
-  radial-gradient(ellipse at 50% 40%,rgba(229,30,58,.22),transparent 60%),
-  radial-gradient(ellipse at center,transparent 35%,rgba(10,5,10,.75) 95%),
-  linear-gradient(180deg,rgba(10,5,10,.3) 0%,rgba(10,5,10,.55) 100%);}
-.noise{position:absolute;inset:0;opacity:.07;mix-blend-mode:overlay;pointer-events:none;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>");}
-.vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.85) 100%);}
+/* ============ NAV ============ */
+.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(7,6,17,.7);border-bottom:1px solid var(--line);}
+.nav-inner{max-width:1280px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.2rem;letter-spacing:-.5px;}
+.logo-glyph{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--purple),var(--blue));
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 16px rgba(136,56,212,.5);}
+.logo-text{background:linear-gradient(135deg,#fff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.logo-text small{font-weight:500;color:var(--mute);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;}
+.nav-links{display:flex;gap:6px;}
+.nav-links a{padding:8px 14px;border-radius:8px;font-size:.88rem;font-weight:500;color:var(--mute);transition:all .15s;}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.05);}
+.nav-links a.on{color:#fff;background:rgba(136,56,212,.15);}
+.nav-cta{display:flex;align-items:center;gap:10px;}
+.nav-cta .live{display:flex;align-items:center;gap:6px;font-size:.75rem;color:var(--mute);padding:6px 10px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);border-radius:20px;}
+.nav-cta .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 1.6s infinite;}
+@keyframes pulse{50%{opacity:.4;}}
+.btn{padding:9px 16px;border-radius:8px;font-size:.85rem;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all .2s;}
+.btn-primary{background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff;box-shadow:0 4px 14px rgba(136,56,212,.4);}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(136,56,212,.6);}
+.btn-ghost{border:1px solid var(--line);color:var(--txt);background:rgba(255,255,255,.02);}
+.btn-ghost:hover{border-color:var(--purple-glow);background:rgba(136,56,212,.1);}
+.btn-discord{background:var(--discord);color:#fff;}
+.btn-discord:hover{background:#4752c4;}
+.btn-lime{background:var(--lime);color:#000;font-weight:700;}
+.btn-lime:hover{background:var(--lime-glow);box-shadow:0 4px 14px rgba(143,206,0,.5);}
+.btn svg{width:14px;height:14px;fill:currentColor;}
 
-.stage{position:relative;z-index:5;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 24px 110px;perspective:1400px;}
-.card{position:relative;width:min(420px,93vw);background:rgba(18,8,16,.6);
-  backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
-  border:1px solid rgba(245,237,228,.09);border-radius:20px;padding:36px 28px 24px;text-align:center;
-  box-shadow:0 0 0 1px rgba(229,30,58,.12) inset, 0 30px 80px rgba(0,0,0,.7), 0 0 80px rgba(229,30,58,.18);
-  transform-style:preserve-3d;transition:transform .3s cubic-bezier(.2,.8,.2,1);}
+/* ============ HERO ============ */
+.hero{position:relative;z-index:5;padding:80px 28px 60px;text-align:center;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:20px;
+  background:rgba(136,56,212,.12);border:1px solid rgba(136,56,212,.4);font-size:.75rem;
+  font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#c4a8ff;margin-bottom:18px;}
+.hero-tag svg{width:12px;height:12px;fill:currentColor;}
+.hero h1{font-size:clamp(2.4rem,6vw,4.6rem);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:18px;
+  background:linear-gradient(180deg,#fff 0%,#fff 40%,#a78bfa 80%,#7c3aed 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero h1 .accent{background:linear-gradient(135deg,var(--lime),var(--lime-glow));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero p.lead{font-size:1.1rem;color:var(--mute);max-width:640px;margin:0 auto 30px;line-height:1.6;}
+.hero-ctas{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
 
-.av-wrap{position:relative;width:112px;height:112px;margin:0 auto 14px;}
-.av-ring{position:absolute;inset:-4px;border-radius:50%;border:1px solid rgba(229,30,58,.4);animation:slowSpin 18s linear infinite;}
-.av-ring::after{content:"";position:absolute;top:-3px;left:50%;width:5px;height:5px;border-radius:50%;background:var(--c-blood);box-shadow:0 0 8px var(--c-blood);transform:translateX(-50%);}
-@keyframes slowSpin{to{transform:rotate(360deg);}}
-.avatar{position:absolute;inset:0;border-radius:50%;overflow:hidden;border:1px solid rgba(245,237,228,.1);
-  box-shadow:0 0 24px rgba(229,30,58,.3), inset 0 0 16px rgba(0,0,0,.6);background:#0a0008;}
-.avatar img{width:100%;height:100%;object-fit:cover;filter:saturate(.95) contrast(1.1);}
-.av-status{position:absolute;bottom:2px;right:2px;width:14px;height:14px;border-radius:50%;
-  background:var(--c-blood);border:2px solid #0a0008;box-shadow:0 0 6px var(--c-blood);animation:beat 1.6s ease-in-out infinite;}
-@keyframes beat{0%,100%{transform:scale(1);}40%{transform:scale(1.2);}}
+/* stats strip */
+.stats-strip{max-width:1100px;margin:60px auto 0;padding:0 28px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.stat-card{background:var(--panel);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:14px;padding:22px;
+  position:relative;overflow:hidden;transition:all .2s;}
+.stat-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 0% 0%,var(--accent,var(--purple)),transparent 70%);opacity:.08;}
+.stat-card:hover{border-color:var(--line-bright);transform:translateY(-2px);}
+.stat-card .ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(136,56,212,.15);margin-bottom:12px;}
+.stat-card .ico svg{width:18px;height:18px;fill:var(--accent,var(--purple-glow));}
+.stat-card .num{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;letter-spacing:-1px;}
+.stat-card .lbl{color:var(--mute);font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;margin-top:4px;font-weight:500;}
 
-.name-row{display:flex;align-items:center;justify-content:center;gap:10px;}
-.name{font-family:'Cinzel Decorative',serif;font-weight:900;font-size:2.4rem;letter-spacing:5px;text-shadow:0 0 24px rgba(229,30,58,.55);}
-.badge{display:inline-flex;align-items:center;padding:3px 8px;font-size:.6rem;background:rgba(229,30,58,.15);border:1px solid rgba(229,30,58,.5);
-  border-radius:6px;letter-spacing:2px;font-weight:700;color:var(--c-blood);text-transform:uppercase;font-family:'Orbitron',sans-serif;}
-.handle{font-family:'Orbitron',sans-serif;font-size:.65rem;letter-spacing:5px;color:var(--c-mute);text-transform:uppercase;margin-top:6px;}
-.handle b{color:var(--c-blood);font-weight:400;}
-.bio{margin:14px 0 16px;font-size:.82rem;line-height:1.65;color:rgba(245,237,228,.78);letter-spacing:.4px;}
-.bio em{color:var(--c-blood);font-style:normal;text-shadow:0 0 8px rgba(229,30,58,.4);}
+/* ============ SECTION ============ */
+.section{position:relative;z-index:5;max-width:1280px;margin:0 auto;padding:80px 28px;}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:36px;flex-wrap:wrap;}
+.section-head .ttl{font-size:2.2rem;font-weight:800;letter-spacing:-1px;line-height:1.1;}
+.section-head .ttl small{display:block;font-size:.75rem;font-weight:600;letter-spacing:3px;color:var(--purple-glow);text-transform:uppercase;margin-bottom:8px;}
+.section-head p{color:var(--mute);max-width:480px;}
+.section-actions{display:flex;gap:10px;align-items:center;}
 
-.stats{display:flex;justify-content:center;gap:22px;margin-bottom:18px;font-family:'Orbitron',sans-serif;}
-.stat .v{font-size:1rem;font-weight:700;color:#fff;}
-.stat .l{font-size:.55rem;letter-spacing:3px;color:var(--c-mute);text-transform:uppercase;margin-top:2px;}
+/* search/filter bar */
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;align-items:center;}
+.search{flex:1;min-width:240px;display:flex;align-items:center;gap:10px;padding:11px 14px;background:var(--panel);border:1px solid var(--line);border-radius:10px;}
+.search:focus-within{border-color:var(--purple);}
+.search svg{width:16px;height:16px;fill:var(--mute);flex-shrink:0;}
+.search input{flex:1;background:none;border:none;outline:none;color:#fff;font-size:.9rem;}
+.search input::placeholder{color:var(--dim);}
+.chips{display:flex;gap:6px;flex-wrap:wrap;}
+.chip{padding:8px 12px;border-radius:8px;background:var(--panel);border:1px solid var(--line);font-size:.78rem;font-weight:500;color:var(--mute);transition:all .15s;cursor:pointer;}
+.chip:hover{color:#fff;border-color:var(--line-bright);}
+.chip.on{background:rgba(136,56,212,.15);border-color:var(--purple);color:#fff;}
 
-.div{height:1px;background:linear-gradient(90deg,transparent,rgba(229,30,58,.3),transparent);margin:0 0 18px;}
+/* ============ STAFF GRID ============ */
+.staff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;}
+.staff{position:relative;background:var(--panel);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:16px;
+  padding:22px;overflow:hidden;transition:all .25s;}
+.staff::before{content:"";position:absolute;top:0;left:0;right:0;height:60px;
+  background:linear-gradient(135deg,var(--role-c1,var(--purple)),var(--role-c2,var(--blue)));opacity:.4;}
+.staff:hover{transform:translateY(-3px);border-color:var(--line-bright);box-shadow:0 12px 40px rgba(136,56,212,.2);}
+.staff-top{position:relative;display:flex;align-items:flex-start;gap:14px;margin-bottom:14px;}
+.staff-av{position:relative;width:64px;height:64px;border-radius:14px;overflow:hidden;border:2px solid var(--bg-2);background:#1a1633;flex-shrink:0;
+  box-shadow:0 4px 12px rgba(0,0,0,.4);}
+.staff-av img{width:100%;height:100%;object-fit:cover;}
+.staff-av .placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:800;
+  background:linear-gradient(135deg,var(--role-c1,var(--purple)),var(--role-c2,var(--blue)));color:#fff;}
+.staff-status{position:absolute;bottom:-2px;right:-2px;width:16px;height:16px;border-radius:50%;border:3px solid var(--panel-solid);background:var(--green);}
+.staff-status.away{background:var(--gold);}
+.staff-status.off{background:var(--dim);}
+.staff-status.dnd{background:var(--red);}
+.staff-meta{flex:1;min-width:0;padding-top:4px;}
+.staff-name{font-size:1.05rem;font-weight:700;letter-spacing:-.3px;display:flex;align-items:center;gap:6px;}
+.staff-name .verify{width:14px;height:14px;flex-shrink:0;}
+.staff-name .verify svg{width:14px;height:14px;fill:var(--blue);}
+.staff-handle{font-size:.78rem;color:var(--mute);font-weight:500;margin-top:2px;}
+.staff-role{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;font-size:.7rem;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;margin-top:8px;}
+.role-owner{background:rgba(251,191,36,.15);color:var(--gold);border:1px solid rgba(251,191,36,.4);}
+.role-admin{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.4);}
+.role-mod{background:rgba(136,56,212,.15);color:var(--purple-glow);border:1px solid rgba(136,56,212,.4);}
+.role-support{background:rgba(66,133,244,.15);color:#7eb0ff;border:1px solid rgba(66,133,244,.4);}
+.role-dev{background:rgba(143,206,0,.15);color:var(--lime-glow);border:1px solid rgba(143,206,0,.4);}
+.role-vip{background:rgba(168,85,247,.15);color:#c4a8ff;border:1px solid rgba(168,85,247,.4);}
 
-.socials{display:flex;justify-content:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
-.s-icon{display:flex;align-items:center;justify-content:center;width:36px;height:36px;
-  background:rgba(255,255,255,.02);border:1px solid rgba(245,237,228,.07);border-radius:10px;
-  color:var(--c-mute);transition:all .25s;}
-.s-icon svg{width:14px;height:14px;fill:currentColor;transition:transform .25s;}
-.s-icon:hover{color:var(--c-bone);border-color:rgba(229,30,58,.5);background:rgba(229,30,58,.08);box-shadow:0 4px 14px rgba(229,30,58,.25);}
-.s-icon:hover svg{transform:scale(1.15);}
+.staff-bio{color:var(--mute);font-size:.85rem;line-height:1.55;margin:14px 0;min-height:42px;}
+.staff-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+.staff-tag{padding:4px 8px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:6px;font-size:.7rem;color:var(--mute);font-weight:500;}
+.staff-actions{display:flex;gap:8px;}
+.staff-actions .btn{flex:1;justify-content:center;padding:9px 12px;font-size:.78rem;}
+.staff-actions .btn-icon{flex:0 0 auto;width:36px;padding:0;justify-content:center;}
 
-.links{display:flex;flex-direction:column;gap:7px;}
-.link{display:flex;align-items:center;gap:11px;padding:11px 14px;background:rgba(255,255,255,.015);
-  border:1px solid rgba(245,237,228,.06);border-radius:10px;font-size:.78rem;letter-spacing:.6px;
-  transition:all .25s;position:relative;overflow:hidden;}
-.link::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(229,30,58,.12),transparent);transform:translateX(-100%);transition:transform .7s;}
-.link:hover::before{transform:translateX(100%);}
-.link:hover{border-color:rgba(229,30,58,.35);background:rgba(229,30,58,.05);}
-.link svg.lico{width:14px;height:14px;flex-shrink:0;fill:var(--c-mute);}
-.link:hover svg.lico{fill:var(--c-blood);}
-.link span{flex:1;text-align:left;color:rgba(245,237,228,.85);}
-.link svg.arrow{opacity:.3;transition:all .25s;width:12px;height:12px;fill:currentColor;}
-.link:hover svg.arrow{opacity:.9;transform:translateX(3px);}
+/* ============ SUPPORT CTA SECTION ============ */
+.support-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
+.support-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px;transition:all .2s;position:relative;overflow:hidden;}
+.support-card::after{content:"";position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,var(--accent,var(--purple)),transparent 70%);opacity:.15;pointer-events:none;}
+.support-card:hover{border-color:var(--line-bright);transform:translateY(-3px);}
+.support-card .ico{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(136,56,212,.15);margin-bottom:16px;}
+.support-card .ico svg{width:22px;height:22px;fill:var(--accent,var(--purple-glow));}
+.support-card h3{font-size:1.2rem;font-weight:700;margin-bottom:6px;letter-spacing:-.3px;}
+.support-card p{color:var(--mute);font-size:.88rem;line-height:1.6;margin-bottom:16px;}
+.support-card .btn{width:100%;justify-content:center;}
 
-.foot{margin-top:18px;font-size:.55rem;letter-spacing:4px;color:rgba(245,237,228,.25);text-transform:uppercase;font-family:'Orbitron',sans-serif;}
+/* ============ FAQ ============ */
+.faq{max-width:780px;margin:0 auto;}
+.faq-item{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:border .2s;}
+.faq-item:hover{border-color:var(--line-bright);}
+.faq-item.open{border-color:var(--purple);}
+.faq-q{width:100%;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;text-align:left;font-size:1rem;font-weight:600;color:#fff;}
+.faq-q::after{content:"+";font-size:1.6rem;font-weight:300;color:var(--mute);transition:transform .2s;line-height:1;}
+.faq-item.open .faq-q::after{transform:rotate(45deg);color:var(--purple-glow);}
+.faq-a{padding:0 22px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;color:var(--mute);font-size:.9rem;line-height:1.65;}
+.faq-item.open .faq-a{padding:0 22px 18px;max-height:300px;}
 
-.player{position:fixed;bottom:0;left:0;right:0;z-index:80;
-  background:linear-gradient(180deg,rgba(15,8,15,.85) 0%,rgba(8,3,8,.96) 100%);
-  backdrop-filter:blur(20px);border-top:1px solid rgba(229,30,58,.25);
-  display:grid;grid-template-columns:1fr 2fr 1fr;align-items:center;gap:14px;padding:10px 16px;}
-.pl-now{display:flex;align-items:center;gap:10px;min-width:0;}
-.pl-now .cov{width:44px;height:44px;border-radius:8px;object-fit:cover;border:1px solid rgba(229,30,58,.3);background:#0a0008;}
-.pl-now .meta{min-width:0;}
-.pl-now .t{font-size:.78rem;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.pl-now .a{font-size:.6rem;color:var(--c-mute);letter-spacing:1.5px;text-transform:uppercase;font-family:'Orbitron',sans-serif;}
+/* ============ FOOTER ============ */
+.footer{position:relative;z-index:5;border-top:1px solid var(--line);background:rgba(7,6,17,.6);padding:50px 28px 24px;}
+.footer-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;}
+.footer-brand p{color:var(--mute);font-size:.88rem;margin:14px 0;line-height:1.6;max-width:340px;}
+.footer-brand .socials{display:flex;gap:8px;}
+.footer-brand .socials a{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.footer-brand .socials a:hover{border-color:var(--purple);background:rgba(136,56,212,.15);}
+.footer-brand .socials svg{width:14px;height:14px;fill:var(--mute);}
+.footer-brand .socials a:hover svg{fill:#fff;}
+.footer-col h4{font-size:.78rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;margin-bottom:14px;}
+.footer-col a{display:block;color:var(--mute);font-size:.88rem;padding:5px 0;transition:color .15s;}
+.footer-col a:hover{color:#fff;}
+.footer-bot{max-width:1280px;margin:32px auto 0;padding-top:24px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;color:var(--dim);font-size:.78rem;flex-wrap:wrap;gap:12px;}
 
-.pl-ctrl{display:flex;flex-direction:column;align-items:center;gap:6px;}
-.pl-buttons{display:flex;align-items:center;gap:14px;}
-.pl-buttons button{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--c-mute);transition:all .15s;}
-.pl-buttons button:hover{color:#fff;}
-.pl-buttons .pp{width:36px;height:36px;background:#fff;color:#000;}
-.pl-buttons .pp:hover{transform:scale(1.06);background:var(--c-blood);color:#fff;}
-.pl-buttons svg{width:14px;height:14px;fill:currentColor;}
-.pl-progress{display:flex;align-items:center;gap:8px;width:100%;max-width:520px;font-size:.55rem;color:var(--c-mute);font-family:'Orbitron',sans-serif;}
-.pl-progress .bar{flex:1;height:4px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;cursor:pointer;position:relative;}
-.pl-progress .fill{height:100%;width:0;background:linear-gradient(90deg,var(--c-blood-soft),var(--c-blood));}
-.pl-progress .bar:hover .fill{background:var(--c-blood);}
-
-.pl-right{display:flex;align-items:center;justify-content:flex-end;gap:12px;}
-.pl-right button{width:30px;height:30px;color:var(--c-mute);transition:color .15s;}
-.pl-right button:hover{color:#fff;}
-.pl-right svg{width:14px;height:14px;fill:currentColor;}
-.pl-vol{width:80px;accent-color:var(--c-blood);}
-
-.modal{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px;}
-.modal.show{display:flex;}
-.mbox{position:relative;width:min(640px,96vw);max-height:88vh;overflow-y:auto;background:var(--c-panel);
-  border:1px solid rgba(229,30,58,.35);border-radius:16px;padding:24px;
-  box-shadow:0 30px 80px rgba(0,0,0,.8), 0 0 60px rgba(229,30,58,.2);}
-.mbox h3{font-family:'Cinzel Decorative',serif;font-size:1.4rem;letter-spacing:3px;margin-bottom:4px;}
-.mbox .sub{font-family:'Orbitron',sans-serif;font-size:.6rem;letter-spacing:3px;color:var(--c-mute);text-transform:uppercase;margin-bottom:18px;}
-.mbox .close{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.05);color:var(--c-mute);display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
-.mbox .close:hover{background:rgba(229,30,58,.2);color:#fff;}
-
-.song-list{display:flex;flex-direction:column;gap:4px;}
-.song{display:grid;grid-template-columns:32px 48px 1fr;align-items:center;gap:12px;padding:8px 10px;border-radius:8px;cursor:pointer;transition:background .15s;}
-.song:hover{background:rgba(255,255,255,.04);}
-.song.active{background:rgba(229,30,58,.12);}
-.song .n{font-family:'Orbitron',sans-serif;font-size:.7rem;color:var(--c-mute);text-align:center;}
-.song.active .n{color:var(--c-blood);}
-.song .cv{width:40px;height:40px;border-radius:6px;object-fit:cover;background:#0a0008;}
-.song .info{min-width:0;}
-.song .info .t{font-size:.85rem;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.song .info .a{font-size:.6rem;color:var(--c-mute);letter-spacing:1.5px;text-transform:uppercase;font-family:'Orbitron',sans-serif;margin-top:2px;}
-
-.adm-tabs{display:flex;gap:4px;margin-bottom:18px;border-bottom:1px solid rgba(245,237,228,.08);flex-wrap:wrap;}
-.adm-tabs button{padding:10px 14px;font-size:.65rem;letter-spacing:2px;color:var(--c-mute);text-transform:uppercase;font-family:'Orbitron',sans-serif;border-bottom:2px solid transparent;}
-.adm-tabs button.on{color:#fff;border-bottom-color:var(--c-blood);}
-.adm-pane{display:none;}
-.adm-pane.on{display:block;}
-.adm-row{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:6px;align-items:center;margin-bottom:6px;font-size:.75rem;}
-.adm-row.bg{grid-template-columns:1fr 2fr auto auto;}
-.adm-row.lnk{grid-template-columns:1fr 1.5fr 1.5fr auto;}
-.adm-row input{padding:8px 10px;background:rgba(255,255,255,.04);border:1px solid rgba(245,237,228,.08);border-radius:6px;color:#fff;font-size:.72rem;min-width:0;}
-.adm-row input:focus{outline:none;border-color:var(--c-blood);background:rgba(229,30,58,.08);}
-.adm-row button{padding:6px 10px;border-radius:6px;background:rgba(229,30,58,.15);color:var(--c-blood);font-size:.65rem;letter-spacing:1px;text-transform:uppercase;font-family:'Orbitron',sans-serif;}
-.adm-row button:hover{background:var(--c-blood);color:#fff;}
-.adm-row button.use{background:rgba(245,237,228,.05);color:var(--c-mute);}
-.adm-row button.use.on,.adm-row button.use:hover{background:var(--c-blood);color:#fff;}
-
-.adm-add{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
-.adm-add button{padding:9px 14px;background:linear-gradient(135deg,var(--c-blood),var(--c-blood-soft));color:#fff;border-radius:8px;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;font-family:'Orbitron',sans-serif;font-weight:700;}
-.adm-add button:hover{box-shadow:0 4px 14px rgba(229,30,58,.5);}
-.adm-add button.alt{background:rgba(255,255,255,.06);}
-
-.adm-actions{margin-top:20px;padding-top:18px;border-top:1px solid rgba(245,237,228,.08);display:flex;gap:8px;flex-wrap:wrap;}
-.adm-actions button{padding:10px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(245,237,228,.1);color:#fff;border-radius:8px;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;font-family:'Orbitron',sans-serif;}
-.adm-actions button:hover{border-color:var(--c-blood);}
-.adm-actions button.danger{color:var(--c-blood);}
-
-.note{font-size:.68rem;color:var(--c-mute);line-height:1.6;padding:12px;background:rgba(229,30,58,.06);border-left:2px solid var(--c-blood);border-radius:6px;margin-bottom:14px;}
-
-.login-form{display:flex;flex-direction:column;gap:12px;align-items:center;padding:20px 0;}
-.login-form input{width:100%;padding:12px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(245,237,228,.1);border-radius:8px;color:#fff;font-size:.85rem;text-align:center;letter-spacing:4px;}
-.login-form input:focus{outline:none;border-color:var(--c-blood);}
-.login-form button{padding:12px 22px;background:linear-gradient(135deg,var(--c-blood),var(--c-blood-soft));color:#fff;border-radius:8px;font-weight:700;letter-spacing:3px;font-family:'Orbitron',sans-serif;font-size:.75rem;text-transform:uppercase;}
-.login-err{color:var(--c-blood);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;font-family:'Orbitron',sans-serif;height:14px;}
-
-.fab{position:fixed;width:42px;height:42px;border-radius:50%;background:rgba(15,8,15,.8);backdrop-filter:blur(14px);border:1px solid rgba(229,30,58,.3);color:var(--c-bone);
-  display:flex;align-items:center;justify-content:center;z-index:60;transition:all .2s;}
-.fab:hover{background:var(--c-blood);border-color:var(--c-blood);color:#fff;}
-.fab svg{width:16px;height:16px;fill:currentColor;}
-.fab.lib{top:16px;right:16px;}
-.fab.bg{top:16px;left:16px;}
-
-@media (max-width:640px){
-  .player{grid-template-columns:1fr;gap:8px;padding:8px;}
-  .pl-right{display:none;}
-  .pl-now .cov{width:36px;height:36px;}
-  .name{font-size:1.9rem;letter-spacing:4px;}
-  .stats{gap:14px;}
+/* mobile */
+@media (max-width:880px){
+  .nav-links{display:none;}
+  .stats-strip{grid-template-columns:repeat(2,1fr);}
+  .footer-inner{grid-template-columns:1fr 1fr;}
+  .section-head .ttl{font-size:1.6rem;}
+}
+@media (max-width:520px){
+  .stats-strip{grid-template-columns:1fr 1fr;}
+  .footer-inner{grid-template-columns:1fr;}
+  .hero{padding:50px 20px 40px;}
+  .section{padding:50px 20px;}
 }
 </style>
 </head>
 <body>
 
-<div class="splash" id="splash">
-  <h2>poli</h2>
-  <p>click to enter</p>
+<div class="bg-cosmos">
+  <div class="stars" id="stars"></div>
+  <div class="shoot" style="top:15%;--d:0s;"></div>
+  <div class="shoot" style="top:35%;--d:3s;"></div>
+  <div class="shoot" style="top:60%;--d:6s;"></div>
+  <div class="grid-floor"></div>
 </div>
 
-<div class="bg-stack">
-  <div class="bg-gif" id="bgGif"></div>
-  <div class="bg-tint"></div>
-  <div class="noise"></div>
-  <div class="vignette"></div>
-</div>
-
-<button class="fab bg" id="bgBtn" title="backgrounds">
-  <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
-</button>
-<button class="fab lib" id="libBtn" title="library">
-  <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
-</button>
-
-<div class="stage" id="stage">
-  <div class="card" id="card">
-    <div class="av-wrap">
-      <div class="av-ring"></div>
-      <div class="avatar"><img id="avImg" src="assets/bg1.gif" alt="poli"/></div>
-      <div class="av-status"></div>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="/">
+      <div class="logo-glyph">🌌</div>
+      <div class="logo-text">Cosmo<small>support hub</small></div>
+    </a>
+    <nav class="nav-links">
+      <a href="#" >Home</a>
+      <a href="#" class="on">Staff</a>
+      <a href="#support">Support</a>
+      <a href="#faq">FAQ</a>
+      <a href="#">Status</a>
+    </nav>
+    <div class="nav-cta">
+      <span class="live">all systems online</span>
+      <a class="btn btn-primary" href="https://discord.com/channels/1092440368999563294/1092468883396493422">
+        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+        Open Ticket
+      </a>
     </div>
-    <div class="name-row"><h1 class="name" id="pName">poli</h1><span class="badge">✟ Owner</span></div>
-    <div class="handle">@<b id="pHandle">poli</b> · est 2026</div>
-    <p class="bio" id="pBio"></p>
-    <div class="stats" id="pStats"></div>
-    <div class="div"></div>
-    <div class="socials" id="pSocials"></div>
-    <div class="links" id="pLinks"></div>
-    <div class="foot">poli ⌁ 2026</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-tag">
+    <svg viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/></svg>
+    24/7 elite support
+  </div>
+  <h1>Meet the team behind<br/><span class="accent">the cosmos</span></h1>
+  <p class="lead">our staff handles 300K+ tickets, 4,000+ verified reviews, and instant delivery — backed by a 24/7 squad of moderators, devs, and VIP support agents.</p>
+  <div class="hero-ctas">
+    <a class="btn btn-lime" href="#staff">
+      <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+      View Staff
+    </a>
+    <a class="btn btn-discord" href="#">
+      <svg viewBox="0 0 24 24"><path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4l-.19.39c1.5.36 2.96.96 4.31 1.78A14 14 0 0 0 5.88 6.17C7.23 5.36 8.69 4.75 10.19 4.39L10 4c-1.5.26-2.93.71-4.27 1.33C2.69 9.34 1.83 13.32 2.27 17.27c1.79 1.32 3.83 2.13 5.97 2.49.4-.55.76-1.13 1.06-1.74-.59-.22-1.16-.5-1.7-.83l.41-.32c3.42 1.6 7.13 1.6 10.5 0l.41.32c-.54.33-1.11.61-1.7.83.3.61.66 1.19 1.06 1.74 2.14-.36 4.18-1.17 5.97-2.49.5-4.49-1-8.55-3.78-11.94zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12 0-1.17.84-2.12 1.89-2.12 1.06 0 1.9.96 1.89 2.12 0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12 0-1.17.84-2.12 1.89-2.12 1.06 0 1.9.96 1.89 2.12 0 1.17-.83 2.12-1.89 2.12z"/></svg>
+      Join Discord
+    </a>
+  </div>
+</section>
+
+<div class="stats-strip">
+  <div class="stat-card" style="--accent:var(--purple);">
+    <div class="ico"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+    <div class="num" data-count="24">0</div>
+    <div class="lbl">staff online</div>
+  </div>
+  <div class="stat-card" style="--accent:var(--lime);">
+    <div class="ico" style="background:rgba(143,206,0,.15);"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+    <div class="num" data-count="300000">0</div>
+    <div class="lbl">tickets resolved</div>
+  </div>
+  <div class="stat-card" style="--accent:#fbbf24;">
+    <div class="ico" style="background:rgba(251,191,36,.15);"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+    <div class="num" data-count="4127">0</div>
+    <div class="lbl">5-star reviews</div>
+  </div>
+  <div class="stat-card" style="--accent:var(--blue);">
+    <div class="ico" style="background:rgba(66,133,244,.15);"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg></div>
+    <div class="num">&lt; 5m</div>
+    <div class="lbl">avg response</div>
   </div>
 </div>
 
-<div class="player">
-  <div class="pl-now">
-    <img class="cov" id="plCov" src="assets/bg2.gif" alt=""/>
-    <div class="meta">
-      <div class="t" id="plTitle">—</div>
-      <div class="a" id="plArtist">—</div>
+<!-- ============ STAFF SECTION ============ -->
+<section class="section" id="staff">
+  <div class="section-head">
+    <div>
+      <div class="ttl"><small>The Crew</small>Our staff &amp; support team</div>
+    </div>
+    <p>filter by role or search by name. all staff verified and active. response time avg under 5 min on Discord.</p>
+  </div>
+
+  <div class="toolbar">
+    <div class="search">
+      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
+      <input id="searchInput" placeholder="search staff by name or role..."/>
+    </div>
+    <div class="chips" id="roleChips">
+      <button class="chip on" data-role="all">All</button>
+      <button class="chip" data-role="owner">Owner</button>
+      <button class="chip" data-role="admin">Admin</button>
+      <button class="chip" data-role="mod">Mod</button>
+      <button class="chip" data-role="support">Support</button>
+      <button class="chip" data-role="dev">Dev</button>
+      <button class="chip" data-role="vip">VIP</button>
     </div>
   </div>
-  <div class="pl-ctrl">
-    <div class="pl-buttons">
-      <button id="plShuf" title="shuffle"><svg viewBox="0 0 24 24"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg></button>
-      <button id="plPrev" title="prev"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
-      <button class="pp" id="plPP" title="play/pause"><svg id="ppIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
-      <button id="plNext" title="next"><svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6z"/></svg></button>
-      <button id="plLoop" title="loop"><svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg></button>
+
+  <div class="staff-grid" id="staffGrid"></div>
+</section>
+
+<!-- ============ SUPPORT CARDS ============ -->
+<section class="section" id="support">
+  <div class="section-head">
+    <div>
+      <div class="ttl"><small>Need help?</small>How can we assist you today</div>
     </div>
-    <div class="pl-progress">
-      <span id="plCur">0:00</span>
-      <div class="bar" id="plBar"><div class="fill" id="plFill"></div></div>
-      <span id="plDur">0:00</span>
+    <p>pick the channel that fits — instant Discord chat, formal ticket, or private direct line. all routed through our staff hub.</p>
+  </div>
+
+  <div class="support-grid">
+    <div class="support-card" style="--accent:var(--discord);">
+      <div class="ico" style="background:rgba(88,101,242,.15);"><svg viewBox="0 0 24 24" fill="#7eb0ff"><path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4l-.19.39c1.5.36 2.96.96 4.31 1.78A14 14 0 0 0 5.88 6.17C7.23 5.36 8.69 4.75 10.19 4.39L10 4c-1.5.26-2.93.71-4.27 1.33C2.69 9.34 1.83 13.32 2.27 17.27c1.79 1.32 3.83 2.13 5.97 2.49.4-.55.76-1.13 1.06-1.74-.59-.22-1.16-.5-1.7-.83l.41-.32c3.42 1.6 7.13 1.6 10.5 0l.41.32c-.54.33-1.11.61-1.7.83.3.61.66 1.19 1.06 1.74 2.14-.36 4.18-1.17 5.97-2.49.5-4.49-1-8.55-3.78-11.94zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12 0-1.17.84-2.12 1.89-2.12 1.06 0 1.9.96 1.89 2.12 0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12 0-1.17.84-2.12 1.89-2.12 1.06 0 1.9.96 1.89 2.12 0 1.17-.83 2.12-1.89 2.12z"/></svg></div>
+      <h3>Discord Support</h3>
+      <p>fastest channel. live agents in #support. avg response under 5 min, 24/7.</p>
+      <a class="btn btn-discord" href="https://discord.com/channels/1092440368999563294/1092468883396493422">join server</a>
+    </div>
+    <div class="support-card" style="--accent:var(--purple);">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12zm0-3H6V9h12zm0-3H6V6h12z"/></svg></div>
+      <h3>Open Ticket</h3>
+      <p>private case for billing, refunds, or sensitive issues. tracked in your account dashboard.</p>
+      <a class="btn btn-primary" href="https://discord.com/channels/1092440368999563294/1092468883396493422">create ticket</a>
+    </div>
+    <div class="support-card" style="--accent:var(--lime);">
+      <div class="ico" style="background:rgba(143,206,0,.15);"><svg viewBox="0 0 24 24"><path d="M21 15v4c0 1.1-.9 2-2 2h-4c-3.41 0-6.46-1.6-8.43-4.09l1.6-1.6C9.71 17.31 12.16 19 15 19h4v-4h2zM5 9c0 2.84 1.69 5.29 4.69 7.83l1.6-1.6C8.6 13.46 7 10.41 7 7V3H3c-1.1 0-2 .9-2 2zm14-2V3h-4c-1.1 0-2 .9-2 2v4l4 4 5-5z"/></svg></div>
+      <h3>Direct Line · VIP</h3>
+      <p>VIP-only Telegram + private email. dedicated agent assigned to your account.</p>
+      <a class="btn btn-lime" href="#">contact VIP</a>
     </div>
   </div>
-  <div class="pl-right">
-    <button id="plLib" title="library"><svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/></svg></button>
-    <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:var(--c-mute);"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
-    <input type="range" class="pl-vol" id="plVol" min="0" max="100" value="50"/>
-  </div>
-</div>
+</section>
 
-<audio id="bgm" preload="auto"></audio>
-
-<div class="modal" id="libModal">
-  <div class="mbox">
-    <button class="close" data-close>×</button>
-    <h3>Library</h3>
-    <div class="sub">crypt playlist</div>
-    <div class="song-list" id="songList"></div>
-  </div>
-</div>
-
-<div class="modal" id="bgModal">
-  <div class="mbox">
-    <button class="close" data-close>×</button>
-    <h3>Backgrounds</h3>
-    <div class="sub">choose your aesthetic</div>
-    <div class="song-list" id="bgList"></div>
-  </div>
-</div>
-
-<div class="modal" id="loginModal">
-  <div class="mbox" style="max-width:340px;">
-    <button class="close" data-close>×</button>
-    <h3>Admin</h3>
-    <div class="sub">enter password</div>
-    <div class="login-form">
-      <input type="password" id="pwInput" placeholder="••••••••"/>
-      <div class="login-err" id="pwErr"></div>
-      <button id="pwBtn">unlock ✟</button>
+<!-- ============ FAQ ============ -->
+<section class="section" id="faq">
+  <div class="section-head">
+    <div>
+      <div class="ttl"><small>FAQ</small>Frequently asked questions</div>
     </div>
-    <div class="note" style="margin-top:14px;">default: <b>poli666</b> · change in admin → settings</div>
   </div>
-</div>
-
-<div class="modal" id="admModal">
-  <div class="mbox">
-    <button class="close" data-close>×</button>
-    <h3>Admin Panel</h3>
-    <div class="sub">edit your crypt</div>
-    <div class="adm-tabs">
-      <button class="on" data-tab="songs">Songs</button>
-      <button data-tab="bgs">Backgrounds</button>
-      <button data-tab="profile">Profile</button>
-      <button data-tab="links">Links</button>
-      <button data-tab="settings">Settings</button>
+  <div class="faq" id="faqList">
+    <div class="faq-item">
+      <button class="faq-q">How fast does support respond?<br></button>
+      <div class="faq-a">Discord live chat avg under 5 minutes. Tickets within 30 min during peak. VIP direct line is instant.</div>
     </div>
-
-    <div class="adm-pane on" data-pane="songs">
-      <div class="note">paste direct .mp3 URL (archive.org, github raw, dropbox direct). cover is optional GIF/image URL.</div>
-      <div id="admSongs"></div>
-      <div class="adm-add"><button id="addSong">+ add song</button></div>
+    <div class="faq-item">
+      <button class="faq-q">Which payment methods do you accept?</button>
+      <div class="faq-a">PayPal, Stripe (cards), crypto (BTC/ETH/USDT), Apple Pay, Google Pay. All listed on checkout.</div>
     </div>
-
-    <div class="adm-pane" data-pane="bgs">
-      <div class="note">paste direct .gif URL. click "use" to apply live.</div>
-      <div id="admBgs"></div>
-      <div class="adm-add"><button id="addBg">+ add background</button></div>
+    <div class="faq-item">
+      <button class="faq-q">How do I become staff?</button>
+      <div class="faq-a">Apply via the form in #applications on Discord. We hire mods and support agents quarterly. Devs apply by referral.</div>
     </div>
+    <div class="faq-item">
+      <button class="faq-q">Refund policy?</button>
+      <div class="faq-a">14-day refund window if a product fails to deliver or is detected. File via Open Ticket — handled within 24h.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">How do I report a staff member?</button>
+      <div class="faq-a">DM an Owner or Admin directly, or use the #report channel. All reports are confidential and reviewed within 24h.</div>
+    </div>
+  </div>
+</section>
 
-    <div class="adm-pane" data-pane="profile">
-      <div class="adm-row" style="grid-template-columns:120px 1fr;"><span>name</span><input id="pfName"/></div>
-      <div class="adm-row" style="grid-template-columns:120px 1fr;"><span>handle</span><input id="pfHandle"/></div>
-      <div class="adm-row" style="grid-template-columns:120px 1fr;"><span>avatar URL</span><input id="pfAvatar"/></div>
-      <div class="adm-row" style="grid-template-columns:120px 1fr;"><span>bio (HTML)</span><input id="pfBio"/></div>
-      <div class="adm-row" style="grid-template-columns:120px 1fr 1fr 1fr;">
-        <span>stats</span><input id="pfFollowers" placeholder="followers"/><input id="pfVisits" placeholder="visits"/><input id="pfVibes" placeholder="vibes"/>
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="logo" href="/"><div class="logo-glyph">🌌</div><div class="logo-text">Cosmo<small>support hub</small></div></a>
+      <p>elite support for the gaming cosmos. trusted by 40,000+ users since 2018.</p>
+      <div class="socials">
+        <a href="#"><svg viewBox="0 0 24 24"><path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4l-.19.39c1.5.36 2.96.96 4.31 1.78A14 14 0 0 0 5.88 6.17C7.23 5.36 8.69 4.75 10.19 4.39L10 4c-1.5.26-2.93.71-4.27 1.33C2.69 9.34 1.83 13.32 2.27 17.27c1.79 1.32 3.83 2.13 5.97 2.49.4-.55.76-1.13 1.06-1.74-.59-.22-1.16-.5-1.7-.83l.41-.32c3.42 1.6 7.13 1.6 10.5 0l.41.32c-.54.33-1.11.61-1.7.83.3.61.66 1.19 1.06 1.74 2.14-.36 4.18-1.17 5.97-2.49.5-4.49-1-8.55-3.78-11.94z"/></svg></a>
+        <a href="#"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231z"/></svg></a>
+        <a href="#"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z"/></svg></a>
+        <a href="#"><svg viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993z"/></svg></a>
       </div>
     </div>
-
-    <div class="adm-pane" data-pane="links">
-      <div class="note">primary buttons (icon · label · URL). icon options: discord, twitch, spotify, x, instagram, tiktok, youtube, telegram.</div>
-      <div id="admLinks"></div>
-      <div class="adm-add"><button id="addLink">+ add link</button></div>
-      <div class="sub" style="margin-top:18px;">socials (icon row)</div>
-      <div id="admSocials"></div>
-      <div class="adm-add"><button id="addSocial" class="alt">+ add social</button></div>
+    <div class="footer-col">
+      <h4>Hub</h4>
+      <a href="#staff">Staff</a>
+      <a href="#support">Support</a>
+      <a href="#faq">FAQ</a>
+      <a href="#">Status</a>
     </div>
-
-    <div class="adm-pane" data-pane="settings">
-      <div class="adm-row" style="grid-template-columns:160px 1fr;"><span>change password</span><input id="setPw" type="password" placeholder="new password"/></div>
-      <div class="note">to publish changes for visitors: click <b>Export data.json</b>, replace data.json in your repo, commit + push. Local changes save instantly to this browser only.</div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About</a>
+      <a href="#">Careers</a>
+      <a href="#">Press</a>
+      <a href="#">Blog</a>
     </div>
-
-    <div class="adm-actions">
-      <button id="saveLocal">save (this browser)</button>
-      <button id="exportJson">export data.json</button>
-      <button id="resetData" class="danger">reset to default</button>
-      <button id="logoutAdm" style="margin-left:auto;">logout</button>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+      <a href="#">Refunds</a>
+      <a href="#">Cookies</a>
     </div>
   </div>
-</div>
+  <div class="footer-bot">
+    <span>© 2026 Cosmo · all rights reserved</span>
+    <span>made in the cosmos 🌌</span>
+  </div>
+</footer>
 
 <script>
-const SVG = {
-  discord:'<svg class="lico" viewBox="0 0 24 24"><path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"/></svg>',
-  twitch:'<svg class="lico" viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>',
-  spotify:'<svg class="lico" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.56.3z"/></svg>',
-  x:'<svg class="lico" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>',
-  instagram:'<svg class="lico" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>',
-  tiktok:'<svg class="lico" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z"/></svg>',
-  youtube:'<svg class="lico" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>',
-  telegram:'<svg class="lico" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12s5.374 12 12 12 12-5.373 12-12S18.626 0 12 0zm5.568 8.16c-.169 1.858-.896 6.728-1.268 9.07-.158 1.045-.467 1.4-.766 1.428-.654.06-1.151-.432-1.785-.847-.99-.65-1.55-1.054-2.51-1.687-1.11-.731-.39-1.133.244-1.79.166-.171 3.044-2.79 3.1-3.027.007-.03.013-.14-.052-.198s-.16-.038-.228-.022c-.097.022-1.642 1.043-4.633 3.063-.438.301-.835.448-1.19.44-.392-.008-1.146-.221-1.706-.403-.687-.224-1.232-.342-1.185-.722.025-.198.297-.4.819-.609 3.207-1.397 5.345-2.318 6.414-2.764 3.054-1.27 3.688-1.49 4.102-1.498.09-.001.293.021.425.13.111.092.142.215.157.302.014.087.032.286.018.441z"/></svg>'
+// stars
+const starsEl = document.getElementById('stars');
+for(let i=0;i<140;i++){
+  const s = document.createElement('div');
+  s.className='star';
+  s.style.left=Math.random()*100+'vw';
+  s.style.top=Math.random()*100+'vh';
+  s.style.setProperty('--dur',(2+Math.random()*4)+'s');
+  s.style.setProperty('--d',(Math.random()*5)+'s');
+  if(Math.random()>.85) s.style.background='#a78bfa';
+  starsEl.appendChild(s);
+}
+
+// staff data
+const STAFF = [
+  {name:"poli",handle:"@poli",role:"owner",bio:"founder · runs the cosmos. handles escalations + VIP.",tags:["english","russian","24/7"],status:"online",avatar:"assets/bg1.gif",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422",verify:true},
+  {name:"Vex",handle:"@vex",role:"admin",bio:"head of operations. final word on bans + refunds.",tags:["english","spanish"],status:"online",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422",verify:true},
+  {name:"Nyx",handle:"@nyx",role:"admin",bio:"infrastructure + security. maintains loader uptime.",tags:["english","french"],status:"away",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422",verify:true},
+  {name:"Ravn",handle:"@ravn",role:"mod",bio:"discord moderator · channel manager.",tags:["english"],status:"online",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422"},
+  {name:"Lumi",handle:"@lumi",role:"mod",bio:"community moderator · keeps the chat clean.",tags:["english","japanese"],status:"online",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422"},
+  {name:"Echo",handle:"@echo",role:"mod",bio:"reports handler · 24/7 night shift.",tags:["english"],status:"dnd",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422"},
+  {name:"Kairo",handle:"@kairo",role:"support",bio:"tier 1 support · billing + payment issues.",tags:["english","portuguese"],status:"online",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422"},
+  {name:"Sable",handle:"@sable",role:"support",bio:"tier 2 support · technical problems.",tags:["english","german"],status:"online",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422"},
+  {name:"Mira",handle:"@mira",role:"support",bio:"refunds + chargebacks specialist.",tags:["english"],status:"away",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422"},
+  {name:"Zen",handle:"@zen",role:"dev",bio:"loader engineer · builds the core stack.",tags:["c++","rust","reverse-eng"],status:"online",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422",verify:true},
+  {name:"Hex",handle:"@hex",role:"dev",bio:"web + dashboard developer.",tags:["typescript","react"],status:"off",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422"},
+  {name:"Aria",handle:"@aria",role:"vip",bio:"VIP concierge · handles whitelist clients.",tags:["english","russian"],status:"online",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422",verify:true}
+];
+
+const ROLE_COLORS = {
+  owner:["#fbbf24","#f59e0b"],
+  admin:["#ef4444","#dc2626"],
+  mod:["#8838d4","#6d28d9"],
+  support:["#4285F4","#2563eb"],
+  dev:["#8fce00","#65a30d"],
+  vip:["#a855f7","#7c3aed"]
 };
 
-let DATA = null;
-const LSKEY = 'poliData';
+let activeRole = "all";
+let searchQ = "";
 
-async function sha256(s){
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-}
+function initials(n){return n.split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase();}
 
-async function loadData(){
-  try{
-    const r = await fetch('data.json?t='+Date.now());
-    DATA = await r.json();
-  }catch(e){
-    DATA = {songs:[],backgrounds:[],passwordHash:'',profile:{name:'poli',handle:'poli',bio:'',avatar:'',stats:{}},links:[],socials:[]};
-  }
-  const local = localStorage.getItem(LSKEY);
-  if(local){
-    try{ const lo = JSON.parse(local); DATA = Object.assign(DATA, lo); }catch(e){}
-  }
-}
-
-function saveLocal(){ localStorage.setItem(LSKEY, JSON.stringify(DATA)); }
-
-function render(){
-  const p = DATA.profile || {};
-  document.getElementById('avImg').src = p.avatar || 'assets/bg1.gif';
-  document.getElementById('pName').textContent = p.name || 'poli';
-  document.getElementById('pHandle').textContent = p.handle || 'poli';
-  document.getElementById('pBio').innerHTML = p.bio || '';
-  const st = p.stats || {};
-  document.getElementById('pStats').innerHTML = `
-    <div class="stat"><div class="v">${st.followers||'0'}</div><div class="l">followers</div></div>
-    <div class="stat"><div class="v">${st.visits||'0'}</div><div class="l">visits</div></div>
-    <div class="stat"><div class="v">${st.vibes||'∞'}</div><div class="l">vibes</div></div>`;
-  document.getElementById('pSocials').innerHTML = (DATA.socials||[]).map(s=>{
-    const svg = (SVG[s.icon]||SVG.discord).replace('class="lico"','');
-    return `<a class="s-icon" href="${s.url||'#'}" target="_blank" rel="noopener">${svg}</a>`;
+function renderStaff(){
+  const grid = document.getElementById('staffGrid');
+  const list = STAFF.filter(s=>{
+    if(activeRole!=="all" && s.role!==activeRole) return false;
+    if(searchQ && !(`${s.name} ${s.handle} ${s.role}`.toLowerCase().includes(searchQ.toLowerCase()))) return false;
+    return true;
+  });
+  if(!list.length){ grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--mute);padding:60px;">no staff found</div>'; return; }
+  grid.innerHTML = list.map(s=>{
+    const [c1,c2] = ROLE_COLORS[s.role] || ["#8838d4","#4285F4"];
+    const av = s.avatar ? `<img src="${s.avatar}"/>` : `<div class="placeholder">${initials(s.name)}</div>`;
+    const verifyIcon = s.verify ? `<span class="verify"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></span>` : "";
+    const slug = s.handle.replace('@','').toLowerCase();
+    return `<div class="staff" style="--role-c1:${c1};--role-c2:${c2};">
+      <div class="staff-top">
+        <div class="staff-av">${av}<div class="staff-status ${s.status}"></div></div>
+        <div class="staff-meta">
+          <div class="staff-name">${s.name}${verifyIcon}</div>
+          <div class="staff-handle">${s.handle}</div>
+          <div class="staff-role role-${s.role}">${s.role}</div>
+        </div>
+      </div>
+      <div class="staff-bio">${s.bio}</div>
+      <div class="staff-tags">${s.tags.map(t=>`<span class="staff-tag">${t}</span>`).join('')}</div>
+      <div class="staff-actions">
+        <a class="btn btn-primary" href="s.html?u=${slug}"><svg viewBox="0 0 24 24"><path d="M9 11.75c-.69 0-1.25.56-1.25 1.25s.56 1.25 1.25 1.25 1.25-.56 1.25-1.25-.56-1.25-1.25-1.25zm6 0c-.69 0-1.25.56-1.25 1.25s.56 1.25 1.25 1.25 1.25-.56 1.25-1.25-.56-1.25-1.25-1.25zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-.29.02-.58.05-.86 2.36-1.05 4.23-2.98 5.21-5.37C11.07 8.33 14.05 10 17.42 10c.78 0 1.53-.09 2.25-.26.21.71.33 1.47.33 2.26 0 4.41-3.59 8-8 8z"/></svg>Profile</a>
+        <a class="btn btn-ghost btn-icon" href="${s.ticket}" title="Open Ticket"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></a>
+      </div>
+    </div>`;
   }).join('');
-  document.getElementById('pLinks').innerHTML = (DATA.links||[]).map(l=>`
-    <a class="link" href="${l.url||'#'}" target="_blank" rel="noopener">
-      ${SVG[l.icon]||SVG.discord}<span>${l.label||''}</span>
-      <svg class="arrow" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
-    </a>`).join('');
-  applyBg(DATA.activeBackground);
-  renderLibrary(); renderBgList();
-  if(DATA.songs && DATA.songs.length) loadSong(0,false);
 }
 
-function applyBg(id){
-  const bg = (DATA.backgrounds||[]).find(b=>b.id===id) || (DATA.backgrounds||[])[0];
-  if(bg){ document.getElementById('bgGif').style.backgroundImage = `url('${bg.url}')`; DATA.activeBackground = bg.id; }
-}
-
-const audio = document.getElementById('bgm');
-let curIdx = 0, isShuffle=false, isLoop=false;
-
-function fmt(s){if(!s||isNaN(s))return '0:00';const m=Math.floor(s/60),x=Math.floor(s%60);return `${m}:${x<10?'0':''}${x}`;}
-function loadSong(i,play=true){
-  if(!DATA.songs.length)return;
-  curIdx = (i+DATA.songs.length)%DATA.songs.length;
-  const s = DATA.songs[curIdx];
-  audio.src = s.url;
-  document.getElementById('plTitle').textContent = s.title;
-  document.getElementById('plArtist').textContent = s.artist;
-  document.getElementById('plCov').src = s.cover || 'assets/bg2.gif';
-  if(play) audio.play().catch(()=>{});
-  renderLibrary();
-}
-function next(){ if(isShuffle) loadSong(Math.floor(Math.random()*DATA.songs.length)); else loadSong(curIdx+1); }
-function prev(){ loadSong(curIdx-1); }
-
-document.getElementById('plPP').onclick = ()=>{ if(audio.paused){audio.play();}else{audio.pause();} };
-document.getElementById('plNext').onclick = next;
-document.getElementById('plPrev').onclick = prev;
-document.getElementById('plShuf').onclick = (e)=>{ isShuffle=!isShuffle; e.currentTarget.style.color = isShuffle?'var(--c-blood)':''; };
-document.getElementById('plLoop').onclick = (e)=>{ isLoop=!isLoop; audio.loop=isLoop; e.currentTarget.style.color = isLoop?'var(--c-blood)':''; };
-audio.addEventListener('play', ()=>document.getElementById('ppIcon').innerHTML='<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>');
-audio.addEventListener('pause', ()=>document.getElementById('ppIcon').innerHTML='<path d="M8 5v14l11-7z"/>');
-audio.addEventListener('ended', ()=>{ if(!isLoop) next(); });
-audio.addEventListener('timeupdate', ()=>{
-  if(audio.duration){
-    document.getElementById('plFill').style.width = (audio.currentTime/audio.duration*100)+'%';
-    document.getElementById('plCur').textContent = fmt(audio.currentTime);
-    document.getElementById('plDur').textContent = fmt(audio.duration);
-  }
-});
-document.getElementById('plBar').addEventListener('click', e=>{
-  const r=e.currentTarget.getBoundingClientRect();
-  audio.currentTime = ((e.clientX-r.left)/r.width)*audio.duration;
-});
-document.getElementById('plVol').addEventListener('input', e=>audio.volume=e.target.value/100);
-audio.volume = 0.5;
-
-function renderLibrary(){
-  const list = document.getElementById('songList');
-  list.innerHTML = (DATA.songs||[]).map((s,i)=>`
-    <div class="song ${i===curIdx?'active':''}" data-i="${i}">
-      <div class="n">${i+1}</div>
-      <img class="cv" src="${s.cover||'assets/bg2.gif'}"/>
-      <div class="info"><div class="t">${s.title}</div><div class="a">${s.artist}</div></div>
-    </div>`).join('') || '<div class="note">no songs yet</div>';
-  list.querySelectorAll('.song').forEach(el=>{
-    el.onclick = ()=>loadSong(parseInt(el.dataset.i),true);
-  });
-}
-function renderBgList(){
-  const list = document.getElementById('bgList');
-  list.innerHTML = (DATA.backgrounds||[]).map(b=>`
-    <div class="song ${b.id===DATA.activeBackground?'active':''}" data-id="${b.id}">
-      <div class="n">●</div>
-      <img class="cv" src="${b.url}"/>
-      <div class="info"><div class="t">${b.name}</div><div class="a">${b.id===DATA.activeBackground?'active':'click to apply'}</div></div>
-    </div>`).join('');
-  list.querySelectorAll('.song').forEach(el=>{
-    el.onclick = ()=>{ applyBg(el.dataset.id); renderBgList(); saveLocal(); };
-  });
-}
-
-function openModal(id){ document.getElementById(id).classList.add('show'); }
-function closeModal(id){ document.getElementById(id).classList.remove('show'); }
-document.querySelectorAll('[data-close]').forEach(b=>b.onclick=e=>e.target.closest('.modal').classList.remove('show'));
-document.querySelectorAll('.modal').forEach(m=>m.onclick=e=>{ if(e.target===m) m.classList.remove('show'); });
-
-document.getElementById('libBtn').onclick = ()=>openModal('libModal');
-document.getElementById('plLib').onclick = ()=>openModal('libModal');
-document.getElementById('bgBtn').onclick = ()=>openModal('bgModal');
-
-const splash=document.getElementById('splash');
-splash.addEventListener('click',()=>{
-  splash.classList.add('gone');
-  if(DATA && DATA.songs && DATA.songs.length) audio.play().catch(()=>{});
-});
-
-const card=document.getElementById('card'),stage=document.getElementById('stage');
-stage.addEventListener('mousemove',e=>{
-  const r=card.getBoundingClientRect(),cxx=r.left+r.width/2,cyy=r.top+r.height/2;
-  const rx=((e.clientY-cyy)/r.height)*-4,ry=((e.clientX-cxx)/r.width)*4;
-  card.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;
-});
-stage.addEventListener('mouseleave',()=>card.style.transform='');
-
-let isAdmin = false;
-function checkAdminGate(){
-  const params = new URLSearchParams(location.search);
-  if(params.get('admin')==='1') openModal('loginModal');
-}
-document.getElementById('pwBtn').onclick = async ()=>{
-  const v = document.getElementById('pwInput').value;
-  const h = await sha256(v);
-  if(h === DATA.passwordHash){
-    isAdmin = true; closeModal('loginModal');
-    document.getElementById('pwInput').value=''; document.getElementById('pwErr').textContent='';
-    openAdmin();
-  } else { document.getElementById('pwErr').textContent='wrong password'; }
-};
-document.getElementById('pwInput').addEventListener('keydown',e=>{ if(e.key==='Enter') document.getElementById('pwBtn').click(); });
-
-function openAdmin(){ renderAdmin(); openModal('admModal'); }
-
-document.querySelectorAll('.adm-tabs button').forEach(b=>{
-  b.onclick = ()=>{
-    document.querySelectorAll('.adm-tabs button').forEach(x=>x.classList.remove('on'));
-    document.querySelectorAll('.adm-pane').forEach(x=>x.classList.remove('on'));
-    b.classList.add('on');
-    document.querySelector(`.adm-pane[data-pane="${b.dataset.tab}"]`).classList.add('on');
+document.querySelectorAll('#roleChips .chip').forEach(c=>{
+  c.onclick = ()=>{
+    document.querySelectorAll('#roleChips .chip').forEach(x=>x.classList.remove('on'));
+    c.classList.add('on');
+    activeRole = c.dataset.role;
+    renderStaff();
   };
 });
 
-function renderAdmin(){
-  document.getElementById('admSongs').innerHTML = DATA.songs.map((s,i)=>`
-    <div class="adm-row" style="grid-template-columns:1fr 1fr 2fr auto;">
-      <input value="${s.title||''}" data-k="title" data-i="${i}" placeholder="title"/>
-      <input value="${s.artist||''}" data-k="artist" data-i="${i}" placeholder="artist"/>
-      <input value="${s.url||''}" data-k="url" data-i="${i}" placeholder="mp3 url"/>
-      <button data-del-song="${i}">×</button>
-      <input value="${s.cover||''}" data-k="cover" data-i="${i}" placeholder="cover url" style="grid-column:1/-1;margin-top:4px;"/>
-    </div>`).join('') || '<div class="note">no songs</div>';
-  document.querySelectorAll('#admSongs input').forEach(inp=>{
-    inp.oninput = ()=>{ DATA.songs[+inp.dataset.i][inp.dataset.k] = inp.value; };
-  });
-  document.querySelectorAll('[data-del-song]').forEach(b=>{
-    b.onclick = ()=>{ DATA.songs.splice(+b.dataset.delSong,1); renderAdmin(); };
-  });
-
-  document.getElementById('admBgs').innerHTML = DATA.backgrounds.map((b,i)=>`
-    <div class="adm-row bg">
-      <input value="${b.name||''}" data-bk="name" data-bi="${i}" placeholder="name"/>
-      <input value="${b.url||''}" data-bk="url" data-bi="${i}" placeholder="gif url"/>
-      <button class="use ${b.id===DATA.activeBackground?'on':''}" data-use="${b.id}">use</button>
-      <button data-del-bg="${i}">×</button>
-    </div>`).join('') || '<div class="note">no bgs</div>';
-  document.querySelectorAll('#admBgs input').forEach(inp=>{
-    inp.oninput = ()=>{
-      DATA.backgrounds[+inp.dataset.bi][inp.dataset.bk] = inp.value;
-      if(DATA.backgrounds[+inp.dataset.bi].id===DATA.activeBackground && inp.dataset.bk==='url') applyBg(DATA.activeBackground);
-    };
-  });
-  document.querySelectorAll('[data-use]').forEach(b=>{
-    b.onclick = ()=>{ applyBg(b.dataset.use); renderAdmin(); };
-  });
-  document.querySelectorAll('[data-del-bg]').forEach(b=>{
-    b.onclick = ()=>{ DATA.backgrounds.splice(+b.dataset.delBg,1); renderAdmin(); };
-  });
-
-  const p = DATA.profile;
-  document.getElementById('pfName').value = p.name||'';
-  document.getElementById('pfHandle').value = p.handle||'';
-  document.getElementById('pfAvatar').value = p.avatar||'';
-  document.getElementById('pfBio').value = p.bio||'';
-  document.getElementById('pfFollowers').value = p.stats?.followers||'';
-  document.getElementById('pfVisits').value = p.stats?.visits||'';
-  document.getElementById('pfVibes').value = p.stats?.vibes||'';
-
-  document.getElementById('admLinks').innerHTML = DATA.links.map((l,i)=>`
-    <div class="adm-row lnk">
-      <input value="${l.icon||''}" data-lk="icon" data-li="${i}" placeholder="icon"/>
-      <input value="${l.label||''}" data-lk="label" data-li="${i}" placeholder="label"/>
-      <input value="${l.url||''}" data-lk="url" data-li="${i}" placeholder="url"/>
-      <button data-del-link="${i}">×</button>
-    </div>`).join('');
-  document.querySelectorAll('#admLinks input').forEach(inp=>{
-    inp.oninput = ()=>{ DATA.links[+inp.dataset.li][inp.dataset.lk] = inp.value; };
-  });
-  document.querySelectorAll('[data-del-link]').forEach(b=>{
-    b.onclick = ()=>{ DATA.links.splice(+b.dataset.delLink,1); renderAdmin(); };
-  });
-
-  document.getElementById('admSocials').innerHTML = DATA.socials.map((s,i)=>`
-    <div class="adm-row" style="grid-template-columns:1fr 2fr auto;">
-      <input value="${s.icon||''}" data-sk="icon" data-si="${i}" placeholder="icon"/>
-      <input value="${s.url||''}" data-sk="url" data-si="${i}" placeholder="url"/>
-      <button data-del-soc="${i}">×</button>
-    </div>`).join('');
-  document.querySelectorAll('#admSocials input').forEach(inp=>{
-    inp.oninput = ()=>{ DATA.socials[+inp.dataset.si][inp.dataset.sk] = inp.value; };
-  });
-  document.querySelectorAll('[data-del-soc]').forEach(b=>{
-    b.onclick = ()=>{ DATA.socials.splice(+b.dataset.delSoc,1); renderAdmin(); };
-  });
-}
-
-document.getElementById('addSong').onclick = ()=>{ DATA.songs.push({id:'s'+Date.now(),title:'new song',artist:'unknown',url:'',cover:''}); renderAdmin(); };
-document.getElementById('addBg').onclick = ()=>{ DATA.backgrounds.push({id:'b'+Date.now(),name:'new bg',url:''}); renderAdmin(); };
-document.getElementById('addLink').onclick = ()=>{ DATA.links.push({icon:'discord',label:'new link',url:'#'}); renderAdmin(); };
-document.getElementById('addSocial').onclick = ()=>{ DATA.socials.push({icon:'discord',url:'#'}); renderAdmin(); };
-
-document.getElementById('saveLocal').onclick = async ()=>{
-  DATA.profile.name = document.getElementById('pfName').value;
-  DATA.profile.handle = document.getElementById('pfHandle').value;
-  DATA.profile.avatar = document.getElementById('pfAvatar').value;
-  DATA.profile.bio = document.getElementById('pfBio').value;
-  DATA.profile.stats = {
-    followers: document.getElementById('pfFollowers').value,
-    visits: document.getElementById('pfVisits').value,
-    vibes: document.getElementById('pfVibes').value
-  };
-  const newPw = document.getElementById('setPw').value;
-  if(newPw){ DATA.passwordHash = await sha256(newPw); document.getElementById('setPw').value=''; alert('password updated'); }
-  saveLocal(); render();
-  alert('saved (this browser). Export data.json + push to repo for visitors.');
-};
-
-document.getElementById('exportJson').onclick = ()=>{
-  const blob = new Blob([JSON.stringify(DATA,null,2)],{type:'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob); a.download = 'data.json'; a.click();
-};
-
-document.getElementById('resetData').onclick = ()=>{
-  if(confirm('reset to default? local changes lost.')){
-    localStorage.removeItem(LSKEY); location.reload();
-  }
-};
-
-document.getElementById('logoutAdm').onclick = ()=>{ isAdmin=false; closeModal('admModal'); };
-
-document.addEventListener('keydown', e=>{
-  if(e.shiftKey && e.key==='A' && !document.querySelector('.modal.show')){
-    if(isAdmin) openAdmin(); else openModal('loginModal');
-  }
+document.getElementById('searchInput').addEventListener('input', e=>{
+  searchQ = e.target.value;
+  renderStaff();
 });
 
-loadData().then(()=>{ render(); checkAdminGate(); });
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.onclick = ()=>q.parentElement.classList.toggle('open');
+});
+
+// stat counters
+function animateCount(el, end){
+  const start = 0, dur = 1400;
+  const t0 = performance.now();
+  function step(t){
+    const p = Math.min((t-t0)/dur, 1);
+    const eased = 1 - Math.pow(1-p, 3);
+    const v = Math.floor(start + (end-start)*eased);
+    el.textContent = v.toLocaleString();
+    if(p<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const obs = new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting && !e.target.dataset.done){
+      animateCount(e.target, parseInt(e.target.dataset.count));
+      e.target.dataset.done="1";
+    }
+  });
+});
+document.querySelectorAll('[data-count]').forEach(el=>obs.observe(el));
+
+renderStaff();
 </script>
 </body>
 </html>
