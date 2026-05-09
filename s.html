@@ -71,70 +71,29 @@ input{font-family:inherit;}
 
 /* main */
 .stage{position:relative;z-index:5;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 24px 110px;overflow-y:auto;perspective:1400px;}
-.card{position:relative;width:min(460px,94vw);background:var(--panel);backdrop-filter:blur(20px) saturate(140%);
-  -webkit-backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--line);border-radius:22px;
-  padding:0 0 24px;text-align:center;overflow:hidden;
+.card{position:relative;width:min(440px,94vw);background:var(--panel);backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);border:1px solid var(--line);border-radius:24px;
+  padding:0 0 28px;text-align:center;overflow:hidden;
   box-shadow:
-    0 0 0 1px rgba(136,56,212,.15) inset,
-    0 30px 90px rgba(0,0,0,.75),
-    0 0 60px rgba(136,56,212,.25),
-    0 0 120px rgba(66,133,244,.1);
-  transform-style:preserve-3d;
-  transition:transform .25s cubic-bezier(.2,.8,.2,1);
-  animation:cardIn .9s cubic-bezier(.2,.8,.2,1) both;}
-@keyframes cardIn{from{opacity:0;transform:translateY(40px) scale(.96);}to{opacity:1;transform:translateY(0) scale(1);}}
-.card > *{animation:fadeUp .7s cubic-bezier(.2,.8,.2,1) both;}
-.card > *:nth-child(1){animation-delay:.1s;}
-.card > *:nth-child(2){animation-delay:.2s;}
-.card > *:nth-child(3){animation-delay:.3s;}
-.card > *:nth-child(4){animation-delay:.4s;}
-.card > *:nth-child(5){animation-delay:.5s;}
-.card > *:nth-child(6){animation-delay:.55s;}
-.card > *:nth-child(7){animation-delay:.6s;}
-.card > *:nth-child(8){animation-delay:.65s;}
-.card > *:nth-child(9){animation-delay:.7s;}
-.card > *:nth-child(10){animation-delay:.75s;}
-.card > *:nth-child(11){animation-delay:.8s;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+    0 0 0 1px rgba(255,255,255,.04) inset,
+    0 40px 100px rgba(0,0,0,.8),
+    0 0 80px rgba(136,56,212,.18);
+  animation:cardIn .7s cubic-bezier(.2,.8,.2,1) both;}
+@keyframes cardIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 
-/* holographic shine sweep across card */
-.card::after{content:"";position:absolute;inset:-2px;border-radius:22px;pointer-events:none;
-  background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.08) 50%,transparent 70%);
-  background-size:200% 200%;animation:shine 6s ease-in-out infinite;}
-@keyframes shine{0%,100%{background-position:-100% -100%;}50%{background-position:200% 200%;}}
+/* banner */
+.banner{height:140px;position:relative;overflow:hidden;
+  background:linear-gradient(120deg,#3b1d6e 0%,#1e3a8a 50%,#3b1d6e 100%);
+  background-size:200% 100%;animation:bannerDrift 14s ease-in-out infinite;}
+@keyframes bannerDrift{0%,100%{background-position:0% 0%;}50%{background-position:100% 0%;}}
+.banner::after{content:"";position:absolute;inset:0;background:
+  radial-gradient(ellipse at 30% 100%,rgba(136,56,212,.5),transparent 60%),
+  radial-gradient(ellipse at 70% 0%,rgba(66,133,244,.35),transparent 60%);}
+.banner-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.5;mix-blend-mode:overlay;}
 
-/* banner — animated mesh */
-.banner{height:130px;position:relative;overflow:hidden;
-  background:linear-gradient(135deg,#8838d4 0%,#4285F4 50%,#a855f7 100%);
-  background-size:200% 200%;animation:meshShift 8s ease-in-out infinite;}
-@keyframes meshShift{0%,100%{background-position:0% 0%;}50%{background-position:100% 100%;}}
-.banner::before{content:"";position:absolute;inset:0;
-  background:
-    radial-gradient(circle at 20% 50%,rgba(255,255,255,.25),transparent 50%),
-    radial-gradient(circle at 80% 30%,rgba(143,206,0,.3),transparent 50%),
-    radial-gradient(circle at 60% 80%,rgba(168,85,247,.4),transparent 50%);
-  animation:blobs 10s ease-in-out infinite;}
-@keyframes blobs{0%,100%{transform:scale(1) translate(0,0);}50%{transform:scale(1.2) translate(-10px,5px);}}
-.banner::after{content:"";position:absolute;top:0;left:-50%;width:50%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);
-  animation:bannerSweep 5s linear infinite;}
-@keyframes bannerSweep{to{left:150%;}}
-.banner-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.55;mix-blend-mode:overlay;}
-.banner-deco{position:absolute;inset:0;pointer-events:none;
-  background-image:
-    radial-gradient(circle at 1px 1px,rgba(255,255,255,.15) 1px,transparent 0);
-  background-size:14px 14px;mask-image:linear-gradient(180deg,#000 30%,transparent 100%);
-  -webkit-mask-image:linear-gradient(180deg,#000 30%,transparent 100%);}
-
-.av-wrap{position:relative;width:108px;height:108px;margin:-54px auto 12px;z-index:5;}
-.av-wrap::before{content:"";position:absolute;inset:-12px;border-radius:30px;
-  background:conic-gradient(from var(--ang,0deg),var(--purple),var(--blue),var(--lime),var(--purple));
-  filter:blur(8px);opacity:.5;animation:ringRot 6s linear infinite;}
-@property --ang{syntax:'<angle>';initial-value:0deg;inherits:false;}
-@keyframes ringRot{to{--ang:360deg;}}
-.avatar{position:relative;width:100%;height:100%;border-radius:26px;overflow:hidden;border:4px solid var(--panel-solid);background:#1a1633;
-  box-shadow:0 8px 28px rgba(0,0,0,.6),0 0 0 2px rgba(136,56,212,.4);transition:transform .25s;}
-.avatar:hover{transform:scale(1.04) rotate(-2deg);}
+.av-wrap{position:relative;width:120px;height:120px;margin:-60px auto 14px;z-index:5;}
+.avatar{position:relative;width:100%;height:100%;border-radius:28px;overflow:hidden;border:5px solid var(--panel-solid);background:#1a1633;
+  box-shadow:0 12px 32px rgba(0,0,0,.6);}
 .avatar img,.avatar .ph{width:100%;height:100%;object-fit:cover;}
 .avatar .ph{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--purple),var(--blue));
   font-size:2.2rem;font-weight:800;color:#fff;}
@@ -196,8 +155,14 @@ input{font-family:inherit;}
 .name{font-size:1.7rem;font-weight:800;letter-spacing:-.5px;}
 .verify{display:inline-flex;width:20px;height:20px;align-items:center;justify-content:center;}
 .verify svg{width:18px;height:18px;fill:var(--blue);}
-.handle{font-size:.85rem;color:var(--mute);font-weight:500;margin-top:2px;}
-.role{display:inline-flex;align-items:center;padding:4px 12px;border-radius:8px;font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-top:10px;}
+.handle{font-size:.82rem;color:var(--mute);font-weight:500;margin-top:4px;}
+.role-inline{display:inline-flex;align-items:center;padding:1px 8px;border-radius:5px;font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-left:4px;}
+.toast{position:fixed;bottom:90px;left:50%;transform:translate(-50%,30px);z-index:300;
+  background:rgba(20,18,40,.95);backdrop-filter:blur(14px);border:1px solid var(--purple);
+  color:#fff;padding:12px 20px;border-radius:12px;font-size:.85rem;font-weight:600;
+  box-shadow:0 8px 30px rgba(0,0,0,.6),0 0 30px rgba(136,56,212,.4);
+  opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;}
+.toast.show{opacity:1;transform:translate(-50%,0);}
 .role-owner{background:rgba(251,191,36,.15);color:var(--gold);border:1px solid rgba(251,191,36,.4);}
 .role-admin{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.4);}
 .role-mod{background:rgba(136,56,212,.15);color:var(--purple-glow);border:1px solid rgba(136,56,212,.4);}
@@ -548,105 +513,54 @@ function render(){
   const status = p.status||'online';
 
   const liveText = {
-    online:`<span class="dot"></span><span>Active now · responding in &lt;5m</span>`,
-    away:`<span class="dot"></span><span>Away · back soon</span>`,
+    online:`<span class="dot"></span><span>Active now</span>`,
+    away:`<span class="dot"></span><span>Away</span>`,
     dnd:`<span class="dot"></span><span>Do not disturb</span>`,
-    off:`<span class="dot"></span><span>Offline · last seen recently</span>`
+    off:`<span class="dot"></span><span>Offline</span>`
   };
   const liveClass = status==='online'?'':status;
-  const reviews = DATA.reviews && DATA.reviews.length ? DATA.reviews : [
-    {text:"Solved my refund in literally 2 minutes. Goat.", who:"@kxnvz · 5★"},
-    {text:"Most patient support agent I've ever dealt with.", who:"@reign · 5★"},
-    {text:"Knew exactly what was wrong before I finished typing.", who:"@m1lk · 5★"}
-  ];
-  const trustBadges = [
-    {cls:'gold', icon:'<svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>', label:`${st.rating||'4.9★'} pro`},
-    p.verified?{cls:'blue', icon:'<svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>', label:'verified'}:null,
-    {cls:'lime', icon:'<svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>', label:'fast responder'},
-    {cls:'purple', icon:'<svg viewBox="0 0 24 24"><path d="M19 8l-4 4h3c0 3.31-2.69 6-6 6-1.01 0-1.97-.25-2.8-.7l-1.46 1.46C8.97 19.54 10.43 20 12 20c4.42 0 8-3.58 8-8h3l-4-4zM6 12c0-3.31 2.69-6 6-6 1.01 0 1.97.25 2.8.7l1.46-1.46C15.03 4.46 13.57 4 12 4c-4.42 0-8 3.58-8 8H1l4 4 4-4H6z"/></svg>', label:`${st.since||'2024'}+`}
-  ].filter(Boolean);
 
   document.getElementById('card').innerHTML = `
-    <div class="banner"><div class="banner-deco"></div>${banner}</div>
+    <div class="banner">${banner}</div>
     <div class="av-wrap"><div class="avatar">${av}</div><div class="av-status ${status}"></div></div>
     <div class="name-row"><h1 class="name">${p.name||USER}</h1>${verifyHtml}</div>
-    <div class="handle">@${p.handle||USER}</div>
-    ${p.role?`<div><span class="role ${roleClass}">${p.role}</span></div>`:''}
+    <div class="handle">@${p.handle||USER} ${p.role?`· <span class="role-inline ${roleClass}">${p.role}</span>`:''}</div>
     <div><span class="live-row ${liveClass}">${liveText[status]||liveText.online}</span></div>
-    <div class="trust">${trustBadges.map(b=>`<span class="tb ${b.cls}">${b.icon}${b.label}</span>`).join('')}</div>
     <div class="bio">${p.bio||''}</div>
-    <div class="stats">
-      ${st.tickets?`<div class="stat"><div class="v" data-count="${parseInt(String(st.tickets).replace(/\D/g,''))||0}" data-suffix="${String(st.tickets).replace(/[\d,]/g,'').trim()}">${st.tickets}</div><div class="l">tickets</div></div>`:''}
+    ${(st.tickets||st.rating||st.since)?`<div class="stats">
+      ${st.tickets?`<div class="stat"><div class="v">${st.tickets}</div><div class="l">tickets</div></div>`:''}
       ${st.rating?`<div class="stat"><div class="v">${st.rating}</div><div class="l">rating</div></div>`:''}
       ${st.since?`<div class="stat"><div class="v">${st.since}</div><div class="l">since</div></div>`:''}
-    </div>
-    <div class="ticker">
-      <span class="pulse"></span>
-      <div class="scroll"><div class="scroll-inner">
-        <span>helping <b id="liveHelp">3</b> users right now</span>
-        <span><b id="liveToday">12</b> tickets resolved today</span>
-        <span>avg response <b>&lt; 4 min</b></span>
-        <span><b>${st.rating||'4.9★'}</b> from <b>${st.tickets||'1.2K'}</b> reviews</span>
-      </div></div>
-    </div>
-    <div class="reviews">
-      <div class="reviews-head"><span class="ttl">Recent reviews</span><span class="stars">★★★★★</span></div>
-      <div class="review-track" id="reviewTrack">
-        ${reviews.map((r,i)=>`<div class="review ${i===0?'on':''}">"${r.text}"<span class="who">— ${r.who}</span></div>`).join('')}
-      </div>
-    </div>
+    </div>`:''}
     <div class="divider"></div>
-    <div class="socials">${(DATA.socials||[]).map(s=>{
+    ${(DATA.socials||[]).length?`<div class="socials">${DATA.socials.map(s=>{
       const svg = (SVG[s.icon]||SVG.discord).replace('class="lico"','');
       return `<a class="s-icon" href="${s.url||'#'}" target="_blank" rel="noopener">${svg}</a>`;
-    }).join('')}</div>
-    <div class="links">${(DATA.links||[]).map(l=>`
-      <a class="link color-${l.color||'primary'}" href="${l.url||'#'}" target="_blank" rel="noopener">
+    }).join('')}</div>`:''}
+    <div class="links">${(DATA.links||[]).map((l,i)=>`
+      <a class="link color-${l.color||'primary'}" href="${l.url||'#'}" data-li="${i}" target="_blank" rel="noopener">
         ${SVG[l.icon]||SVG.discord}<span>${l.label||''}</span>
         <svg class="arr" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
       </a>`).join('')}</div>
-    <div class="foot"><span class="glyph">🌌</span> cosmo · 2026</div>`;
+    <div class="foot"><span class="glyph">🌌</span> cosmo</div>`;
 
-  // ripple on links
+  // Discord auto-message: copy "hey there can you help me @staff" + open channel
+  const staffName = p.name || USER;
+  const discordMention = p.discordId ? `<@${p.discordId}>` : `@${p.handle||USER}`;
+  const messageText = `hey there can you help me ${discordMention}`;
   document.querySelectorAll('.link').forEach(el=>{
-    el.addEventListener('click', e=>{
-      const r = el.getBoundingClientRect();
-      const ripple = document.createElement('span');
-      ripple.className='ripple';
-      ripple.style.left=(e.clientX-r.left)+'px';
-      ripple.style.top=(e.clientY-r.top)+'px';
-      ripple.style.width=ripple.style.height='10px';
-      el.appendChild(ripple);
-      setTimeout(()=>ripple.remove(),600);
-    });
+    const i = +el.dataset.li;
+    const link = DATA.links[i];
+    if(!link) return;
+    if(link.icon==='discord' || link.icon==='ticket'){
+      el.addEventListener('click', async (e)=>{
+        e.preventDefault();
+        try{ await navigator.clipboard.writeText(messageText); }catch(err){}
+        showToast(`message copied — paste with Ctrl+V in Discord`);
+        setTimeout(()=>{ window.open(link.url||'#','_blank'); }, 600);
+      });
+    }
   });
-
-  // review carousel
-  const reviewEls = document.querySelectorAll('#reviewTrack .review');
-  let rIdx = 0;
-  if(reviewEls.length>1){
-    setInterval(()=>{
-      reviewEls[rIdx].classList.remove('on');
-      rIdx = (rIdx+1)%reviewEls.length;
-      reviewEls[rIdx].classList.add('on');
-    }, 4500);
-  }
-
-  // live ticker numbers (random tick)
-  let helping = 1+Math.floor(Math.random()*5);
-  let today = 8+Math.floor(Math.random()*20);
-  setInterval(()=>{
-    const dh = (Math.random()>.5?1:-1);
-    helping = Math.max(0, Math.min(8, helping+dh));
-    const lh = document.getElementById('liveHelp'); if(lh) lh.textContent=helping;
-  }, 7000);
-  setInterval(()=>{
-    today += Math.floor(Math.random()*2);
-    const lt = document.getElementById('liveToday'); if(lt) lt.textContent=today;
-  }, 11000);
-
-  // confetti burst
-  burstConfetti();
 
   applyBg(DATA.activeBackground);
   renderLib(); renderBgList();
@@ -732,35 +646,14 @@ splash.addEventListener('click',()=>{
   if(DATA && DATA.songs && DATA.songs.length) audio.play().catch(()=>{});
 });
 
-// 3D card tilt
-const stage=document.getElementById('stage');
-stage.addEventListener('mousemove',e=>{
-  const card = document.getElementById('card');
-  if(!card)return;
-  const r=card.getBoundingClientRect(),cxx=r.left+r.width/2,cyy=r.top+r.height/2;
-  const rx=((e.clientY-cyy)/r.height)*-5,ry=((e.clientX-cxx)/r.width)*5;
-  card.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;
-});
-stage.addEventListener('mouseleave',()=>{ const c=document.getElementById('card'); if(c)c.style.transform=''; });
-
-// confetti
-function burstConfetti(){
-  const colors=['#8838d4','#4285F4','#8fce00','#a855f7','#fbbf24','#ffffff'];
-  const n=40;
-  for(let i=0;i<n;i++){
-    const p=document.createElement('div');
-    p.style.cssText=`position:fixed;width:8px;height:8px;background:${colors[i%colors.length]};
-      top:30vh;left:50vw;border-radius:${Math.random()>.5?'50%':'2px'};
-      pointer-events:none;z-index:9999;`;
-    const a=Math.random()*Math.PI*2;
-    const v=200+Math.random()*250;
-    const dx=Math.cos(a)*v,dy=Math.sin(a)*v-100;
-    p.animate([
-      {transform:'translate(0,0) rotate(0)',opacity:1},
-      {transform:`translate(${dx}px,${dy+800}px) rotate(${Math.random()*720}deg)`,opacity:0}
-    ],{duration:1400+Math.random()*600,easing:'cubic-bezier(.2,.8,.2,1)'}).onfinish=()=>p.remove();
-    document.body.appendChild(p);
-  }
+// toast
+function showToast(msg){
+  let t = document.getElementById('toast');
+  if(!t){ t = document.createElement('div'); t.id='toast'; t.className='toast'; document.body.appendChild(t); }
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._tm);
+  t._tm = setTimeout(()=>t.classList.remove('show'), 2400);
 }
 
 // stars
