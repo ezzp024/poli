@@ -1,0 +1,56 @@
+{
+  "discordTicketUrl": "https://discord.com/channels/1092440368999563294/1092468883396493422",
+  "staff": {
+    "vex": {
+      "name": "Vex",
+      "handle": "vex",
+      "discordId": "",
+      "role": "Admin",
+      "roleColor": "admin",
+      "verified": true,
+      "status": "online",
+      "bio": "Head of operations · final word on bans + refunds.",
+      "avatar": "",
+      "banner": "",
+      "stats": {"tickets":"12.4K","rating":"4.9★","since":"2021"},
+      "socials": [
+        {"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"},
+        {"icon":"x","url":"#"},
+        {"icon":"telegram","url":"#"}
+      ]
+    },
+    "nyx": {
+      "name": "Nyx",
+      "handle": "nyx",
+      "discordId": "",
+      "role": "Admin",
+      "roleColor": "admin",
+      "verified": true,
+      "status": "away",
+      "bio": "Infrastructure + security · maintains loader uptime.",
+      "avatar": "",
+      "banner": "",
+      "stats": {"tickets":"8.2K","rating":"4.8★","since":"2020"},
+      "socials": [
+        {"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"},
+        {"icon":"x","url":"#"}
+      ]
+    },
+    "kairo": {
+      "name": "Kairo",
+      "handle": "kairo",
+      "discordId": "",
+      "role": "Support",
+      "roleColor": "support",
+      "verified": false,
+      "status": "online",
+      "bio": "Tier 1 support · billing + payment issues.",
+      "avatar": "",
+      "banner": "",
+      "stats": {"tickets":"3.1K","rating":"4.9★","since":"2024"},
+      "socials": [
+        {"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}
+      ]
+    }
+  }
+}

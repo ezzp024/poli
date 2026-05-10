@@ -37,7 +37,10 @@
       "Bash(cp -r \"C:/Users/popa/Desktop/New folder \\(20\\)\" \"C:/Users/popa/Desktop/poli-bio\")",
       "Read(//c/Users/popa/Desktop/**)",
       "Bash(rm -rf .git staff staff.html s.html)",
-      "Bash(git rm *)"
+      "Bash(git rm *)",
+      "Bash(git -c user.email=\"yuripoli1973@gmail.com\" -c user.name=\"poli\" commit -m \"split: focus repo on cosmo support; staff.html promoted to index\")",
+      "Bash(git remote *)",
+      "Bash(git -c user.email=\"yuripoli1973@gmail.com\" -c user.name=\"poli\" commit -m \"simplify: minimal s.html + single staff.json\")"
     ]
   }
 }
