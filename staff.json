@@ -1,56 +1,271 @@
 {
   "discordTicketUrl": "https://discord.com/channels/1092440368999563294/1092468883396493422",
   "staff": {
-    "vex": {
-      "name": "Vex",
-      "handle": "vex",
-      "discordId": "",
-      "role": "Admin",
-      "roleColor": "admin",
+    "cosmo": {
+      "name": "Cosmo",
+      "handle": "cosmo",
+      "role": "Owner",
+      "roleColor": "owner",
+      "roleGroup": "Cosmo",
       "verified": true,
+      "status": "dnd",
+      "bio": "Founder of Cosmo Community.",
+      "stats": {"rating":"5.0★","since":"2018"},
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "mert": {
+      "name": "mert",
+      "handle": "mert",
+      "role": "Manager",
+      "roleColor": "admin",
+      "roleGroup": "Manager",
+      "verified": true,
+      "status": "dnd",
+      "bio": "Operations manager.",
+      "stats": {"rating":"4.9★"},
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "b": {
+      "name": "b",
+      "handle": "b",
+      "role": "Head Support",
+      "roleColor": "admin",
+      "roleGroup": "Head Support",
+      "verified": true,
+      "status": "dnd",
+      "bio": "Head of support team.",
+      "stats": {"rating":"4.9★"},
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "nips": {
+      "name": "Nips",
+      "handle": "nips",
+      "role": "Senior Support",
+      "roleColor": "support",
+      "roleGroup": "Senior Support",
       "status": "online",
-      "bio": "Head of operations · final word on bans + refunds.",
-      "avatar": "",
-      "banner": "",
-      "stats": {"tickets":"12.4K","rating":"4.9★","since":"2021"},
-      "socials": [
-        {"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"},
-        {"icon":"x","url":"#"},
-        {"icon":"telegram","url":"#"}
-      ]
+      "bio": "Senior support · escalations + complex cases.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
     },
-    "nyx": {
-      "name": "Nyx",
-      "handle": "nyx",
-      "discordId": "",
-      "role": "Admin",
-      "roleColor": "admin",
-      "verified": true,
-      "status": "away",
-      "bio": "Infrastructure + security · maintains loader uptime.",
-      "avatar": "",
-      "banner": "",
-      "stats": {"tickets":"8.2K","rating":"4.8★","since":"2020"},
-      "socials": [
-        {"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"},
-        {"icon":"x","url":"#"}
-      ]
+    "blast0004": {
+      "name": "blast0004",
+      "handle": "blast0004",
+      "role": "Senior Support",
+      "roleColor": "support",
+      "roleGroup": "Senior Support",
+      "status": "off",
+      "bio": "Senior support.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
     },
-    "kairo": {
-      "name": "Kairo",
-      "handle": "kairo",
-      "discordId": "",
+    "yibat": {
+      "name": "YIBAT",
+      "handle": "yibat",
+      "role": "Senior Support",
+      "roleColor": "support",
+      "roleGroup": "Senior Support",
+      "status": "off",
+      "bio": "Senior support.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "oneofthegods": {
+      "name": "OneOfTheGods",
+      "handle": "oneofthegods",
       "role": "Support",
       "roleColor": "support",
-      "verified": false,
-      "status": "online",
-      "bio": "Tier 1 support · billing + payment issues.",
-      "avatar": "",
-      "banner": "",
-      "stats": {"tickets":"3.1K","rating":"4.9★","since":"2024"},
-      "socials": [
-        {"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}
-      ]
+      "roleGroup": "Support",
+      "status": "away",
+      "bio": "Support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "elite830": {
+      "name": "Elite830",
+      "handle": "elite830",
+      "role": "Support",
+      "roleColor": "support",
+      "roleGroup": "Support",
+      "status": "dnd",
+      "bio": "Support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "hardway": {
+      "name": "HardWay",
+      "handle": "hardway",
+      "role": "Support",
+      "roleColor": "support",
+      "roleGroup": "Support",
+      "status": "dnd",
+      "bio": "Support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "poli": {
+      "name": "poli",
+      "handle": "poli",
+      "role": "Support",
+      "roleColor": "support",
+      "roleGroup": "Support",
+      "status": "dnd",
+      "bio": "Support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "ismail": {
+      "name": "Ismail",
+      "handle": "ismail",
+      "role": "Support",
+      "roleColor": "support",
+      "roleGroup": "Support",
+      "status": "off",
+      "bio": "Support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "chinesenoodles": {
+      "name": "Chinese Noodles",
+      "handle": "chinesenoodles",
+      "role": "Support",
+      "roleColor": "support",
+      "roleGroup": "Support",
+      "status": "off",
+      "bio": "Support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "kleinmoretti": {
+      "name": "Klein Moretti",
+      "handle": "kleinmoretti",
+      "role": "Support",
+      "roleColor": "support",
+      "roleGroup": "Support",
+      "status": "off",
+      "bio": "Support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "griz": {
+      "name": "Griz",
+      "handle": "griz",
+      "role": "Support",
+      "roleColor": "support",
+      "roleGroup": "Support",
+      "status": "off",
+      "bio": "Support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "another": {
+      "name": "another",
+      "handle": "another",
+      "role": "Support",
+      "roleColor": "support",
+      "roleGroup": "Support",
+      "status": "off",
+      "bio": "Support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "joker": {
+      "name": "Joker",
+      "handle": "joker",
+      "role": "Support",
+      "roleColor": "support",
+      "roleGroup": "Support",
+      "status": "off",
+      "bio": "Support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "hamood": {
+      "name": "HamooD",
+      "handle": "hamood",
+      "role": "Support",
+      "roleColor": "support",
+      "roleGroup": "Support",
+      "status": "off",
+      "bio": "Support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "kzander": {
+      "name": "Kzander",
+      "handle": "kzander",
+      "role": "Support",
+      "roleColor": "support",
+      "roleGroup": "Support",
+      "status": "off",
+      "bio": "Support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "batman666": {
+      "name": "Batman666",
+      "handle": "batman666",
+      "role": "Support",
+      "roleColor": "support",
+      "roleGroup": "Support",
+      "status": "off",
+      "bio": "Support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "whatshaps": {
+      "name": "whatshaps",
+      "handle": "whatshaps",
+      "role": "Trial Support",
+      "roleColor": "mod",
+      "roleGroup": "Trial Support",
+      "status": "away",
+      "bio": "Trial support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "g59": {
+      "name": "g59",
+      "handle": "g59",
+      "role": "Trial Support",
+      "roleColor": "mod",
+      "roleGroup": "Trial Support",
+      "status": "off",
+      "bio": "Trial support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "trooper-t": {
+      "name": "Trooper-T",
+      "handle": "trooper-t",
+      "role": "Trial Support",
+      "roleColor": "mod",
+      "roleGroup": "Trial Support",
+      "status": "off",
+      "bio": "Trial support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "moistboiis": {
+      "name": "Moistboiis",
+      "handle": "moistboiis",
+      "role": "Trial Support",
+      "roleColor": "mod",
+      "roleGroup": "Trial Support",
+      "status": "off",
+      "bio": "Trial support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "whatisasupp": {
+      "name": "whatisasupp",
+      "handle": "whatisasupp",
+      "role": "Trial Support",
+      "roleColor": "mod",
+      "roleGroup": "Trial Support",
+      "status": "off",
+      "bio": "Trial support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "wirrora": {
+      "name": "Wirrora",
+      "handle": "wirrora",
+      "role": "Trial Support",
+      "roleColor": "mod",
+      "roleGroup": "Trial Support",
+      "status": "off",
+      "bio": "Trial support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
+    },
+    "zxcvtyrl": {
+      "name": "Zxcvty RL",
+      "handle": "zxcvtyrl",
+      "role": "Trial Support",
+      "roleColor": "mod",
+      "roleGroup": "Trial Support",
+      "status": "off",
+      "bio": "Trial support agent.",
+      "socials": [{"icon":"discord","url":"https://discord.com/channels/1092440368999563294/1092468883396493422"}]
     }
   }
 }

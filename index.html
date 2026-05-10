@@ -282,7 +282,7 @@ img{display:block;max-width:100%;}
 <div class="stats-strip">
   <div class="stat-card" style="--accent:var(--purple);">
     <div class="ico"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
-    <div class="num" data-count="24">0</div>
+    <div class="num" id="onlineCount">0</div>
     <div class="lbl">staff online</div>
   </div>
   <div class="stat-card" style="--accent:var(--lime);">
@@ -320,10 +320,8 @@ img{display:block;max-width:100%;}
       <button class="chip on" data-role="all">All</button>
       <button class="chip" data-role="owner">Owner</button>
       <button class="chip" data-role="admin">Admin</button>
-      <button class="chip" data-role="mod">Mod</button>
       <button class="chip" data-role="support">Support</button>
-      <button class="chip" data-role="dev">Dev</button>
-      <button class="chip" data-role="vip">VIP</button>
+      <button class="chip" data-role="mod">Trial</button>
     </div>
   </div>
 
@@ -447,21 +445,8 @@ for(let i=0;i<140;i++){
   starsEl.appendChild(s);
 }
 
-// staff data
-const STAFF = [
-  {name:"poli",handle:"@poli",role:"owner",bio:"founder · runs the cosmos. handles escalations + VIP.",tags:["english","russian","24/7"],status:"online",avatar:"assets/bg1.gif",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422",verify:true},
-  {name:"Vex",handle:"@vex",role:"admin",bio:"head of operations. final word on bans + refunds.",tags:["english","spanish"],status:"online",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422",verify:true},
-  {name:"Nyx",handle:"@nyx",role:"admin",bio:"infrastructure + security. maintains loader uptime.",tags:["english","french"],status:"away",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422",verify:true},
-  {name:"Ravn",handle:"@ravn",role:"mod",bio:"discord moderator · channel manager.",tags:["english"],status:"online",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422"},
-  {name:"Lumi",handle:"@lumi",role:"mod",bio:"community moderator · keeps the chat clean.",tags:["english","japanese"],status:"online",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422"},
-  {name:"Echo",handle:"@echo",role:"mod",bio:"reports handler · 24/7 night shift.",tags:["english"],status:"dnd",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422"},
-  {name:"Kairo",handle:"@kairo",role:"support",bio:"tier 1 support · billing + payment issues.",tags:["english","portuguese"],status:"online",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422"},
-  {name:"Sable",handle:"@sable",role:"support",bio:"tier 2 support · technical problems.",tags:["english","german"],status:"online",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422"},
-  {name:"Mira",handle:"@mira",role:"support",bio:"refunds + chargebacks specialist.",tags:["english"],status:"away",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422"},
-  {name:"Zen",handle:"@zen",role:"dev",bio:"loader engineer · builds the core stack.",tags:["c++","rust","reverse-eng"],status:"online",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422",verify:true},
-  {name:"Hex",handle:"@hex",role:"dev",bio:"web + dashboard developer.",tags:["typescript","react"],status:"off",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422"},
-  {name:"Aria",handle:"@aria",role:"vip",bio:"VIP concierge · handles whitelist clients.",tags:["english","russian"],status:"online",avatar:"",discord:"https://discord.com/channels/1092440368999563294/1092468883396493422",ticket:"https://discord.com/channels/1092440368999563294/1092468883396493422",verify:true}
-];
+// load staff from staff.json
+let STAFF = [], TICKET_URL = '#';
 
 const ROLE_COLORS = {
   owner:["#fbbf24","#f59e0b"],
@@ -475,38 +460,52 @@ const ROLE_COLORS = {
 let activeRole = "all";
 let searchQ = "";
 
-function initials(n){return n.split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase();}
+function initials(n){return (n||'?').split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase();}
 
 function renderStaff(){
   const grid = document.getElementById('staffGrid');
   const list = STAFF.filter(s=>{
-    if(activeRole!=="all" && s.role!==activeRole) return false;
-    if(searchQ && !(`${s.name} ${s.handle} ${s.role}`.toLowerCase().includes(searchQ.toLowerCase()))) return false;
+    if(activeRole!=="all" && (s.roleColor||'').toLowerCase()!==activeRole && (s.roleGroup||'').toLowerCase()!==activeRole) return false;
+    if(searchQ && !(`${s.name} ${s.handle} ${s.role||''}`.toLowerCase().includes(searchQ.toLowerCase()))) return false;
     return true;
   });
   if(!list.length){ grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--mute);padding:60px;">no staff found</div>'; return; }
   grid.innerHTML = list.map(s=>{
-    const [c1,c2] = ROLE_COLORS[s.role] || ["#8838d4","#4285F4"];
+    const rc = (s.roleColor||'support').toLowerCase();
+    const [c1,c2] = ROLE_COLORS[rc] || ROLE_COLORS.support;
     const av = s.avatar ? `<img src="${s.avatar}"/>` : `<div class="placeholder">${initials(s.name)}</div>`;
-    const verifyIcon = s.verify ? `<span class="verify"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></span>` : "";
-    const slug = s.handle.replace('@','').toLowerCase();
+    const verifyIcon = s.verified ? `<span class="verify"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></span>` : "";
     return `<div class="staff" style="--role-c1:${c1};--role-c2:${c2};">
       <div class="staff-top">
-        <div class="staff-av">${av}<div class="staff-status ${s.status}"></div></div>
+        <div class="staff-av">${av}<div class="staff-status ${s.status||'off'}"></div></div>
         <div class="staff-meta">
           <div class="staff-name">${s.name}${verifyIcon}</div>
-          <div class="staff-handle">${s.handle}</div>
-          <div class="staff-role role-${s.role}">${s.role}</div>
+          <div class="staff-handle">@${s.handle}</div>
+          <div class="staff-role role-${rc}">${s.role||''}</div>
         </div>
       </div>
-      <div class="staff-bio">${s.bio}</div>
-      <div class="staff-tags">${s.tags.map(t=>`<span class="staff-tag">${t}</span>`).join('')}</div>
+      <div class="staff-bio">${s.bio||''}</div>
       <div class="staff-actions">
-        <a class="btn btn-primary" href="s.html?u=${slug}"><svg viewBox="0 0 24 24"><path d="M9 11.75c-.69 0-1.25.56-1.25 1.25s.56 1.25 1.25 1.25 1.25-.56 1.25-1.25-.56-1.25-1.25-1.25zm6 0c-.69 0-1.25.56-1.25 1.25s.56 1.25 1.25 1.25 1.25-.56 1.25-1.25-.56-1.25-1.25-1.25zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-.29.02-.58.05-.86 2.36-1.05 4.23-2.98 5.21-5.37C11.07 8.33 14.05 10 17.42 10c.78 0 1.53-.09 2.25-.26.21.71.33 1.47.33 2.26 0 4.41-3.59 8-8 8z"/></svg>Profile</a>
-        <a class="btn btn-ghost btn-icon" href="${s.ticket}" title="Open Ticket"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></a>
+        <a class="btn btn-primary" href="s.html?u=${s.slug}"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Profile</a>
+        <a class="btn btn-ghost btn-icon" href="${TICKET_URL}" title="Open Ticket"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></a>
       </div>
     </div>`;
   }).join('');
+}
+
+async function loadStaff(){
+  try{
+    const r = await fetch('staff.json?t='+Date.now());
+    const db = await r.json();
+    TICKET_URL = db.discordTicketUrl || '#';
+    STAFF = Object.entries(db.staff).map(([slug,v])=>({slug,...v}));
+    renderStaff();
+    const onCount = STAFF.filter(s=>s.status==='online'||s.status==='away'||s.status==='dnd').length;
+    const oc = document.getElementById('onlineCount'); if(oc) oc.textContent = onCount;
+    document.querySelectorAll('a[data-ticket]').forEach(a=>a.href=TICKET_URL);
+  }catch(e){
+    document.getElementById('staffGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--red);padding:60px;">failed to load staff.json</div>';
+  }
 }
 
 document.querySelectorAll('#roleChips .chip').forEach(c=>{
@@ -522,6 +521,8 @@ document.getElementById('searchInput').addEventListener('input', e=>{
   searchQ = e.target.value;
   renderStaff();
 });
+
+loadStaff();
 
 // FAQ accordion
 document.querySelectorAll('.faq-q').forEach(q=>{
